@@ -2,7 +2,7 @@
   "version": 2,
   "framework": "angular",
   "buildCommand": "ng build --configuration production",
-  "outputDirectory": "dist/ExploreRealty",
+  "outputDirectory": "dist/ExploreRealty/browser",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]

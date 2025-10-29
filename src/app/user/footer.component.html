@@ -1,0 +1,65 @@
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sm-4 col-xs-12">
+                <div class="single_footer">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a routerLink="#">Property Sale</a></li>
+                        <li><a routerLink="#">Property Purchase</a></li>
+                        <li><a routerLink="#">The printing and typesetting </a></li>
+                        <li><a routerLink="#">Property Rent / Lease</a></li>
+                        <li><a routerLink="#">Resale Assistance</a></li>
+                        <li><a routerLink="#">Luxury Homes / Villas</a></li>
+                    </ul>
+                </div>
+            </div><!--- END COL -->
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="single_footer single_footer_address">
+                    <h4>Page Link</h4>
+                    <ul>
+                        <li><a routerLink="#">Lorem Ipsum</a></li>
+                        <li><a routerLink="#">Simply dummy text</a></li>
+                        <li><a routerLink="#">The printing and typesetting </a></li>
+                        <li><a routerLink="#">Standard dummy text</a></li>
+                        <li><a routerLink="#">Type specimen book</a></li>
+                    </ul>
+                </div>
+            </div><!--- END COL -->
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="signup_form">
+                    <form [formGroup]="subscribeForm" (ngSubmit)="onSubscribe()" class="subscribe">
+                        <input class="subscribe__input" formControlName="email" type="email"
+                            placeholder="Enter Email Address">
+                        <button type="submit" class="subscribe__btn">
+                            <i class="bi bi-send-fill"></i>
+                        </button>
+                    </form>
+
+                    <!-- Validation & Success Message -->
+                    <p class="subscribe-message text-white" *ngIf="f['email'].errors && f['email'].touched">
+                        <span *ngIf="f['email'].errors['required']">Email is required.</span>
+                        <span *ngIf="f['email'].errors['email']">Please enter a valid email.</span>
+                    </p>
+                    <p class="subscribe-message text-white" *ngIf="message && subscribeForm.valid">
+                        {{ message }}
+                    </p>
+                </div>
+
+                <div class="social_profile">
+                    <ul>
+                        <li><a routerLink="#"><i class="bi bi-facebook"></i></a></li>
+                        <li><a routerLink="#"><i class="bi bi-twitter"></i></a></li>
+                        <li><a routerLink="#"><i class="bi bi-google"></i></a></li>
+                        <li><a routerLink="#"><i class="bi bi-instagram"></i></a></li>
+                    </ul>
+                </div>
+            </div><!--- END COL -->
+        </div><!--- END ROW -->
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+                <p class="copyright">Copyright © 2025.</p>
+            </div><!--- END COL -->
+        </div><!--- END ROW -->
+    </div><!--- END CONTAINER -->
+</div>

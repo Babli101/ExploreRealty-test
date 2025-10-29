@@ -1,0 +1,102 @@
+
+.projects-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 10px;
+  margin-top: 120px;
+}
+
+.project-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  overflow: hidden;
+  width: 280px;
+  max-width: 100%;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  }
+
+  .project-image {
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  .project-details {
+    padding: 12px;
+
+    .project-title {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      color: #333;
+    }
+
+    .project-price {
+      font-weight: bold;
+      color: #1a73e8;
+      margin-bottom: 10px;
+    }
+
+    .project-actions {
+      display: flex;
+      gap: 10px;
+
+      .btn {
+        flex: 1;
+        padding: 6px 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: background 0.2s;
+
+        &.view-btn {
+          background-color: #101c36;
+          color: #fff;
+
+          &:hover {
+            background-color: #10223a;
+          }
+        }
+
+        &.delete-btn {
+          background-color: #e53935;
+          color: #fff;
+
+          &:hover {
+            background-color: #b71c1c;
+          }
+        }
+      }
+    }
+  }
+}
+.no-image-placeholder {
+  width: 150px;
+  height: 150px;
+  background-color: #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: #555;
+  border-radius: 8px;
+}

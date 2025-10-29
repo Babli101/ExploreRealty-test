@@ -1,0 +1,121 @@
+<section class="hero-section contact-page position-relative text-white">
+    <img src="img/home2.webp" class="w-100" style="height: 70vh; object-fit: cover;" alt="Hero Image">
+
+    <!-- Overlay Text -->
+    <div class="position-absolute top-50 start-50 translate-middle text-center">
+        <h1 class="display-5 fw-bold">Find Your Perfect Residential & Commercial Space</h1>
+        <p class="lead">• Explore Realty •</p>
+    </div>
+</section>
+
+<!-- Card Section - FLOATING OVER IMAGE -->
+<section class="card-section position-relative mb-5" style="margin-top: -60px; z-index: 10;">
+    <div class="container">
+        <div class="row justify-content-center ">
+            <!-- Card 1 -->
+            <div class="col-6 col-md-3">
+                <div class="property-card text-center p-3 rounded">
+                    <i class="bi bi-house-door feature-icon mb-3"></i>
+                    <h6>High Rise Properties</h6>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="col-6 col-md-3">
+                <div class="property-card text-center p-3 rounded">
+                    <i class="bi bi-buildings feature-icon mb-3"></i>
+                    <h6>Commercial Properties</h6>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="col-6 col-md-3">
+                <div class="property-card text-center p-3 rounded">
+                    <i class="bi bi-tree feature-icon mb-3"></i>
+                    <h6>Plot & Bungalow</h6>
+                </div>
+            </div>
+            <!-- Card 4 -->
+            <div class="col-6 col-md-3">
+                <div class="property-card text-center p-3 rounded">
+                    <i class="bi bi-building feature-icon mb-3"></i>
+                    <h6>Dealers Floor</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- contact -->
+
+<div class="container-fluid contact py-5 mt-5">
+    <h1 class="mb-5 text-center">Contact Us</h1>
+    <div class="row m-4 g-4">
+
+        <!-- Map Column -->
+        <div class="col-md-6">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7004.117627486164!2d77.36474486586917!3d28.627999348201786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1756360753512!5m2!1sen!2sin"
+                width="100%" height="450" style="border:0; border-radius: 5px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <!-- Form Column -->
+        <div class="col-md-6 mt-5">
+            <form [formGroup]="contactForm" (ngSubmit)="submitContactForm()" class="contact-form">
+
+                <!-- Name -->
+                <div class="mb-3 d-flex align-items-center">
+                    <span class="me-3 fs-4 icons"><i class="bi bi-person-fill"></i></span>
+                    <input type="text" class="form-control" placeholder="NAME..." formControlName="name">
+                </div>
+                <div *ngIf="submitted && f['name'].errors" class="text-danger mb-2">
+                    Name is required.
+                </div>
+
+                <!-- Email -->
+                <div class="mb-3 d-flex align-items-center">
+                    <span class="me-3 fs-4 icons"><i class="bi bi-envelope-fill"></i></span>
+                    <input type="email" class="form-control" placeholder="EMAIL..." formControlName="email">
+                </div>
+                <div *ngIf="submitted && f['email'].errors" class="text-danger mb-2">
+                    Valid email is required.
+                </div>
+
+                <!-- Phone -->
+                <div class="mb-3 d-flex align-items-center">
+                    <span class="me-3 fs-4 icons"><i class="bi bi-telephone-fill"></i></span>
+                    <input type="text" class="form-control" placeholder="PHONE..." formControlName="phone">
+                </div>
+
+                <!-- Message -->
+                <div class="mb-3 d-flex align-items-start">
+                    <span class="me-3 fs-4 icons"><i class="bi bi-envelope-fill"></i></span>
+                    <textarea class="form-control" rows="5" placeholder="MESSAGE..."
+                        formControlName="message"></textarea>
+                </div>
+                <div *ngIf="submitted && f['message'].errors" class="text-danger mb-2">
+                    Message is required.
+                </div>
+
+                <div class="text-end">
+                    <button type="submit" class="btn" >SEND MESSAGE</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer Info -->
+    <div class="row m-4">
+        <div class="col-md-6 footer-info">
+            <h6>ADDRESS</h6>
+            <p>Company Name INC.</p>
+            <p>C-721, KLJ Noida One</p>
+            <p>Noida Sector 62, UP</p>
+        </div>
+        <div class="col-md-6 footer-info">
+            <h6>CONTACT</h6>
+            <p>(+91) 93013 24098</p>
+            <p>office@companyname.com</p>
+        </div>
+    </div>
+</div>

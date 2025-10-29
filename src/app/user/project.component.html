@@ -1,0 +1,21 @@
+<div *ngIf="loading" class="loading">Loading projects...</div>
+<div *ngIf="!(projects$ | async)?.length && !loading" class="no-projects">No projects found.</div>
+
+<div class="projects-container">
+  <div class="project-card" *ngFor="let project of projects$ | async">
+    <div class="project-image">
+      <img [src]="getImage(project) || 'assets/no-image.jpg'" alt="{{ project.name || 'Project image' }}">
+    </div>
+    <div class="project-details">
+      <h3 class="project-title">{{ project.name || 'Project' }}</h3>
+      <p class="project-price">Price: {{ getPrice(project) }}</p>
+
+      <div class="project-actions">
+        <!-- You can either use routerLink directly -->
+        <a class="btn view-btn" [routerLink]="['/single-project', project._id]">Explore</a>
+        <!-- Or use a click handler -->
+        <!-- <button class="btn view-btn" (click)="viewProject(project)">Explore</button> -->
+      </div>
+    </div>
+  </div>
+</div>

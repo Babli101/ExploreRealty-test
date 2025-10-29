@@ -1,0 +1,135 @@
+<div class="container-single" *ngIf="project">
+  <div class="container">
+    <div class="row">
+      <div class="col-8 image-container-col">
+        <!-- ✅ First image -->
+        <img [src]="getImageUrl(project?.gallery?.[5])" class="img-fluid rounded project-main-image"
+          [alt]="project?.name">
+      </div>
+      <div class="col-4">
+        <div class="details">
+          <h4 class="p-3">Details</h4>
+          <ul>
+            <li>
+              <p><strong>Project Name:</strong> {{ project?.name }}</p>
+            </li>
+            <li>
+              <p><strong>Developer:</strong> {{ project?.developer || 'N/A' }}</p>
+            </li>
+            <li>
+              <p><strong>Developer:</strong> {{ project?.rera || 'N/A' }}</p>
+            </li>
+            <li>
+              <p><strong>Category:</strong> {{ project?.category | titlecase }}</p>
+            </li>
+            <li>
+              <p><strong>Size:</strong> {{ project?.size || 'N/A' }}</p>
+            </li>
+            <li>
+              <p><strong>Possession:</strong> {{ project?.possession || 'N/A' }}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ Description section -->
+<div class="container">
+  <div class="row mt-5 align-items-center description-row">
+    <div class="col-md-6 description">
+      <h1>{{ project?.name }}</h1>
+      <p>{{ project?.description }}</p>
+    </div>
+    <div class="col-md-6 description-img text-center">
+      <img [src]="getImageUrl(project?.gallery?.[4] || project?.gallery?.[0])" [alt]="project?.name"
+        class="img-fluid rounded">
+    </div>
+  </div>
+</div>
+
+<!-- ✅ Hero section -->
+<div class="image-container mt-5">
+  <img [src]="getImageUrl(project?.gallery?.[4])" [alt]="project?.name">
+  <div class="overlay"></div>
+  <div class="text-overlay">
+    <h1>{{ project?.name }}</h1>
+    <p>{{ project?.location?.main }}</p>
+
+    <!-- ✅ Brochure download -->
+    <button type="button" class="btn text-white" (click)="downloadBrochure(project?.brochure)"
+      [disabled]="!project?.brochure">
+      Download Brochure
+    </button>
+  </div>
+</div>
+
+<!-- Facilities & gallery carousel -->
+<div class="container my-5" *ngIf="project">
+  <div class="row align-items-center">
+    <!-- Left Column: Facilities -->
+    <div class="col-12 col-md-6 mb-4">
+      <div class="feature-list">
+        <h1>Facilities</h1>
+        <div class="highlight" *ngIf="project?.highlight">
+          {{ project?.highlight }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Carousel -->
+    <div class="col-12 col-md-6">
+      <div id="thumbCarousel" class="carousel slide custom-carousel" data-bs-ride="carousel">
+
+        <!-- Carousel Slides -->
+        <div class="carousel-inner">
+          <div *ngFor="let img of project?.gallery || []; let i = index" class="carousel-item" [class.active]="i === 0">
+            <img [src]="getImageUrl(img)" [alt]="project?.name" class="d-block mx-auto"
+              style="width: 100%; max-height: 400px; object-fit: cover;">
+          </div>
+        </div>
+
+        <!-- Carousel Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#thumbCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#thumbCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<!-- ✅ GSAP Animated Lines -->
+<div class="content-changer mb-5">
+  <div class="line text-center">Discover Inspiring Spaces</div>
+  <div class="line text-center">Residential Comfort,</div>
+  <div class="line text-center">Commercial Success with</div>
+  <div class="line text-center">Explore Realty.</div>
+  <div class="line text-center">
+    <img src="logo-1.png" alt="">
+  </div>
+</div>
+
+<!-- ✅ Map Section -->
+<div class="container location-connectivity">
+  <div>
+    <h2>Location</h2>
+    <p *ngFor="let point of connectivityPoints">
+      <em>{{ point }}</em>
+    </p>
+  </div>
+</div>
+<div id="location" *ngIf="project?.location">
+  <div class="location-section">
+    <div class="map-frame">
+      <iframe [src]="getSafeMap(project?.location?.mapEmbed)" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </div>
+</div>

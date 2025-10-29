@@ -1,0 +1,19 @@
+<div *ngIf="loading" class="loading">Loading projects...</div>
+<div *ngIf="!(projects$ | async)?.length && !loading" class="no-projects">No projects found.</div>
+
+<div class="projects-container">
+  <div class="project-card" *ngFor="let project of projects$ | async">
+    <div class="project-image">
+     <img [src]="getImage(project) || 'assets/no-image.jpg'" alt="Project image">
+    </div>
+    <div class="project-details">
+      <h3 class="project-title">{{ project.name || 'Project' }}</h3>
+      <p class="project-price">Price: {{ getPrice(project) }}</p>
+
+      <div class="project-actions">
+        <a class="btn view-btn" [routerLink]="['/admin/project', project._id]">Explore</a>
+        <button class="btn delete-btn" (click)="deleteProject(project)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,28 +1,33 @@
-
-  
-<nav class="navbar navbar-expand-lg fixed-top navbar-light ">
+<nav class="navbar navbar-expand-lg fixed-top navbar-light">
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="#"><img src="logo.png" alt="Logo" class="logo" /></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" routerLink="/">
+      <img src="logo.png" alt="Logo" class="logo" />
+    </a>
+
+    <button class="navbar-toggler" type="button" (click)="toggleMenu()">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse justify-content-end navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ">
-        <li class="nav-item">
-          <a class="nav-link text-white active" aria-current="page" routerLink="/">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" routerLink="/page">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" routerLink="/project">Project</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" routerLink="/contact" >Contact</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" routerLink="/login" >Login</a>
-        </li>
+
+    <div class="collapse navbar-collapse" [class.show]="isMenuOpen">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link text-white" routerLink="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link text-white" routerLink="/page">About</a></li>
+        <li class="nav-item"><a class="nav-link text-white" routerLink="/contact">Contact</a></li>
+        <li class="nav-item"><a class="nav-link text-white" routerLink="/project">Project</a></li>
+
+        <!-- ✅ If logged in -->
+        <ng-container *ngIf="isLoggedIn; else notLoggedIn">
+          <li class="nav-item">
+            <a class="nav-link text-white" (click)="logout()">Logout</a>
+          </li>
+        </ng-container>
+
+        <!-- ❌ If not logged in -->
+        <ng-template #notLoggedIn>
+          <li class="nav-item">
+            <a class="nav-link text-white" routerLink="/login">Login</a>
+          </li>
+        </ng-template>
       </ul>
     </div>
   </div>

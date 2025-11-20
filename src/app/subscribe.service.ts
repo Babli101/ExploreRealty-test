@@ -1,9 +1,10 @@
 // src/app/subscribe.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
+import { Router } from '@angular/router';
 import { environment } from '../environments/environment';
-import { map } from 'rxjs/operators';
+import { AuthService } from './auth.service'; // 👈 Added
 
 // -----------------------------
 // Project Interfaces
@@ -53,27 +54,82 @@ export interface Project {
 })
 export class SubscribeService {
   private baseUrl = environment.apiBaseUrl;
+
+  // API Endpoints
   private subscribeUrl = `${this.baseUrl}/subscribe`;
   private contactUrl = `${this.baseUrl}/contact`;
   private apiUrl = `${this.baseUrl}/projects`;
+  private authUrl = `${this.baseUrl}/auth`; // ✅ for signup/login
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private auth: AuthService // 👈 Injected AuthService
+  ) {}
 
+  // -----------------------------
   // 📩 Subscribe email
+  // -----------------------------
   subscribe(email: string): Observable<any> {
     return this.http.post<any>(this.subscribeUrl, { email });
   }
 
+  // -----------------------------
   // 📞 Submit contact form
+  // -----------------------------
   submitContact(data: any): Observable<any> {
     return this.http.post<any>(this.contactUrl, data);
   }
 
-  // 🏗️ Add project with images & brochure
-  addProject(projectData: Partial<Project>, images: FileList | null, brochure: File | null): Observable<Project> {
+  // -----------------------------
+  // 👤 Signup API
+  // -----------------------------
+  signup(data: any): Observable<any> {
+    return this.http.post(`${this.authUrl}/signup`, data);
+  }
+
+  // -----------------------------
+  // 🔑 Login API
+  // -----------------------------
+  login(data: any): Observable<any> {
+    return this.http.post(`${this.authUrl}/login`, data).pipe(
+      tap((res: any) => {
+        if (res && res.token) {
+          // ✅ Save to localStorage
+          localStorage.setItem('token', res.token);
+          localStorage.setItem('role', res.role);
+
+          // ✅ Notify AuthService → Navbar will auto-update
+          this.auth.login(res.token);
+
+          // ✅ Navigate by role
+          if (res.role === 'admin') {
+            this.router.navigate(['/admin/get-project']);
+          } else {
+            this.router.navigate(['/user-profile']);
+          }
+        }
+      })
+    );
+  }
+
+  // -----------------------------
+  // 🚪 Logout
+  // -----------------------------
+  logout() {
+    this.auth.logout(); // 👈 Call AuthService logout
+  }
+
+  // -----------------------------
+  // 🏗️ Add Project (with images & brochure)
+  // -----------------------------
+  addProject(
+    projectData: Partial<Project>,
+    images: FileList | null,
+    brochure: File | null
+  ): Observable<Project> {
     const formData = new FormData();
 
-    // Append project fields dynamically
     Object.entries(projectData).forEach(([key, value]) => {
       if (value !== undefined && value !== null) {
         if (typeof value === 'object') {
@@ -84,37 +140,38 @@ export class SubscribeService {
       }
     });
 
-    // Append gallery images
-    if (images) {
-      Array.from(images).forEach(file => formData.append('gallery', file));
-    }
-
-    // Append brochure file
-    if (brochure) {
-      formData.append('brochure', brochure);
-    }
+    if (images) Array.from(images).forEach(file => formData.append('gallery', file));
+    if (brochure) formData.append('brochure', brochure);
 
     return this.http.post<Project>(this.apiUrl, formData);
   }
 
-  // 🔍 Post project using FormData directly
+  // -----------------------------
+  // 📦 Post project using FormData directly
+  // -----------------------------
   postProject(formData: FormData): Observable<Project> {
     return this.http.post<Project>(this.apiUrl, formData);
   }
 
-  // 🔍 Get all projects
+  // -----------------------------
+  // 📂 Get all projects
+  // -----------------------------
   getProjects(): Observable<Project[]> {
     return this.http.get<{ success: boolean; projects: Project[] }>(this.apiUrl)
       .pipe(map(res => res.projects));
   }
 
-  // 🔍 Get single project by ID
+  // -----------------------------
+  // 📄 Get single project by ID
+  // -----------------------------
   getProjectById(id: string): Observable<Project> {
     return this.http.get<{ success: boolean; project: Project }>(`${this.apiUrl}/${id}`)
       .pipe(map(res => res.project));
   }
 
+  // -----------------------------
   // ❌ Delete project by ID
+  // -----------------------------
   deleteProject(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }

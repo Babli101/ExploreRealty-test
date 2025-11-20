@@ -10,10 +10,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideHttpClient, withInterceptorsFromDi, withFetch } from '@angular/common/http';
 import { UserComponent } from './user/user.component';
 import { AdminComponent } from './admin/admin.component';
-import {  SingleProjectComponent } from './user/single-project';
+import { SingleProjectComponent } from './user/single-project';
 import { SingleComponent } from './admin/single';
 import { GetProject } from './admin/get-project';
 import { LoginComponent } from './user/login';
+import { SignupComponent } from './user/signup';
 
 const routes: Routes = [
   {
@@ -25,8 +26,8 @@ const routes: Routes = [
       { path: 'page', component: PageComponent },
       { path: 'project', component: ProjectComponent },
       { path: 'single-project/:id', component: SingleProjectComponent },
-      { path: 'login',component: LoginComponent}
-      // { path: '**', redirectTo: '' }
+      { path: 'signup', component: SignupComponent },
+      { path: 'login', component: LoginComponent }
     ]
   },
   {
@@ -36,7 +37,7 @@ const routes: Routes = [
       { path: 'user-contactlist', component: UserContactListComponent },
       { path: 'add-project', component: AddProjectComponent },
       { path: 'get-project', component: GetProject },
-      { path: 'project/:id', component: SingleComponent},
+      { path: 'project/:id', component: SingleComponent },
       { path: '**', redirectTo: '/' } // optional fallback
     ]
   }

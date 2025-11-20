@@ -12,6 +12,12 @@
     "src/**/*.ts"
   ],
   "exclude": [
-    "src/**/*.spec.ts"
+    "src/**/*.spec.ts",
+    "src/app/app.routes.server.ts",
+    "src/app/app.config.server.ts",
+    "src/main.server.ts",
+    "src/server.ts",
+    "src/environments/environment.prod.ts",
+    "src/app/app.routes.ts"
   ]
 }

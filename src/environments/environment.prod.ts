@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'https://explorerealty.onrender.com'
+  apiBaseUrl: 'https://explorerealty.onrender.com/api'
 };
 

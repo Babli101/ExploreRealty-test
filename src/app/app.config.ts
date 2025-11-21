@@ -14,7 +14,6 @@ import { SingleProjectComponent } from './user/single-project';
 import { SingleComponent } from './admin/single';
 import { GetProject } from './admin/get-project';
 import { LoginComponent } from './user/login';
-import { SignupComponent } from './user/signup';
 
 const routes: Routes = [
   {
@@ -26,7 +25,6 @@ const routes: Routes = [
       { path: 'page', component: PageComponent },
       { path: 'project', component: ProjectComponent },
       { path: 'single-project/:id', component: SingleProjectComponent },
-      { path: 'signup', component: SignupComponent },
       { path: 'login', component: LoginComponent }
     ]
   },

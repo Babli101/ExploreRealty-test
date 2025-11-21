@@ -1,21 +1,42 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Component, AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, AfterViewInit, Inject, PLATFORM_ID, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { gsap } from 'gsap';
+import { SubscribeService } from '../subscribe.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements AfterViewInit {
+export class HomeComponent implements AfterViewInit, OnInit {
+  
   searchResults: any[] = [];
-  searched = false; // to track if search has been done once
+  searched = false;
+  latestProjects: any[] = []; // ⭐ Add this
 
-  // Inject platformId to safely run browser animations
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private subscribeService: SubscribeService   // ⭐ Service injected
+  ) {}
+
+  ngOnInit() {
+    this.fetchLatestProjects();   // ⭐ Fetch 3 projects on load
+  }
+
+  // ⭐ Fetch 3 Latest Projects
+  fetchLatestProjects() {
+    this.subscribeService.getProjects().subscribe({
+      next: (projects) => {
+        this.latestProjects = projects.slice(0, 3); // First 3 projects only
+        console.log("LATEST PROJECTS:", this.latestProjects);
+      },
+      error: (err) => console.error("Project fetch error:", err)
+    });
+  }
 
   allProperties = [
     { city: 'Delhi', type: 'Buy', price: 120000 },

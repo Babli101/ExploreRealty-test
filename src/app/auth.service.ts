@@ -5,21 +5,38 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
+
   private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
   isLoggedIn$ = this.loggedIn.asObservable();
 
+  constructor() {}
+
+  // Check token exist
   private hasToken(): boolean {
     return !!localStorage.getItem('token');
   }
 
-  login(token: string) {
+  // Save token + role
+  login(token: string, role: string) {
     localStorage.setItem('token', token);
+    localStorage.setItem('role', role);
     this.loggedIn.next(true);
   }
 
+  // Get token
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  // Get role
+  getRole(): string | null {
+    return localStorage.getItem('role');
+  }
+
+  // Logout
   logout() {
-    localStorage.clear();
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
     this.loggedIn.next(false);
   }
 }
-    

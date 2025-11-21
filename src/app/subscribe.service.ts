@@ -100,7 +100,7 @@ export class SubscribeService {
           localStorage.setItem('role', res.role);
 
           // ✅ Notify AuthService → Navbar will auto-update
-          this.auth.login(res.token);
+          this.auth.login(res.token, res.role); // ✅ FIXED (2 arguments)
 
           // ✅ Navigate by role
           if (res.role === 'admin') {

@@ -37,25 +37,20 @@ export class GetProject implements OnInit {
 
     // 🖼️ Get image URL safely
     getImage(project: Project): string {
-        const baseUrl = environment.apiBaseUrl?.replace(/\/api$/, '') || 'http://localhost:3000';
+        const baseUrl = environment.apiBaseUrl.replace('/api', '');
 
-        if (project.gallery?.length) {
-            const firstImage = project.gallery[0];
-            const imageUrl = typeof firstImage === 'string'
-                ? firstImage
-                : firstImage.url || firstImage.filename;
+        if (!project.gallery?.length) return 'assets/noimage.jpg';
 
-            if (!imageUrl) return 'assets/noimage.jpg';
+        const img = project.gallery[0];
 
-            // If already a full URL
-            if (imageUrl.startsWith('http')) return imageUrl;
+        let path = img.url || img.filename;
+        if (!path) return 'assets/noimage.jpg';
 
-            // ✅ Match your backend path (no `/projects/` here)
-            return `${baseUrl}${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`;
-        }
+        if (path.startsWith('http')) return path;
 
-        // fallback
-        return 'assets/noimage.jpg';
+        if (!path.startsWith('/')) path = '/' + path;
+
+        return baseUrl + path;
     }
 
 
@@ -72,7 +67,7 @@ export class GetProject implements OnInit {
     viewProject(project: Project) {
         console.log('View project:', project);
         if (project._id) {
-           this.router.navigate(['/project', project._id]);
+            this.router.navigate(['/project', project._id]);
         } else {
             console.warn('Project _id not found');
         }

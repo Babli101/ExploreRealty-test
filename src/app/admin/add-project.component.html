@@ -82,7 +82,8 @@
       <!-- DESCRIPTION -->
       <div class="mb-3">
         <label class="form-label">Description</label>
-        <textarea class="form-control" rows="3" placeholder="Enter description" formControlName="description"></textarea>
+        <textarea class="form-control" rows="3" placeholder="Enter description"
+          formControlName="description"></textarea>
       </div>
 
       <!-- AMENITIES -->
@@ -93,19 +94,43 @@
 
       <!-- LOCATION -->
       <h5 class="mt-3">Location Details</h5>
+
       <div class="row">
-        <div class="mb-3 col-md-4" *ngFor="let loc of [1,2,3,4,5]">
-          <input type="text" class="form-control" [placeholder]="'Location ' + loc" [formControlName]="'location' + loc">
+        <!-- Main Location -->
+        <div class="mb-3 col-md-4">
+          <input type="text" class="form-control" placeholder="Main Location" formControlName="location">
+        </div>
+
+        <!-- Location 1 -->
+        <div class="mb-3 col-md-4">
+          <input type="text" class="form-control" placeholder="Location 1" formControlName="location1">
+        </div>
+
+        <!-- Location 2 -->
+        <div class="mb-3 col-md-4">
+          <input type="text" class="form-control" placeholder="Location 2" formControlName="location2">
+        </div>
+
+        <!-- Location 3 -->
+        <div class="mb-3 col-md-4">
+          <input type="text" class="form-control" placeholder="Location 3" formControlName="location3">
+        </div>
+
+        <!-- Location 4 -->
+        <div class="mb-3 col-md-4">
+          <input type="text" class="form-control" placeholder="Location 4" formControlName="location4">
+        </div>
+
+        <!-- Location 5 -->
+        <div class="mb-3 col-md-4">
+          <input type="text" class="form-control" placeholder="Location 5" formControlName="location5">
         </div>
       </div>
 
-      <div class="mb-3">
-        <input type="text" class="form-control" placeholder="Main Location" formControlName="location">
-      </div>
-
+      <!-- Google Map Embed -->
       <div class="mb-3">
         <label class="form-label">Google Map Embed Link</label>
-        <input type="text" class="form-control" placeholder="Paste embed URL from Google Maps" formControlName="mapEmbed">
+        <input type="text" class="form-control" placeholder="Paste Google Maps embed URL" formControlName="mapEmbed">
       </div>
 
       <!-- GALLERY + BROCHURE -->

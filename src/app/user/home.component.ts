@@ -4,6 +4,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { gsap } from 'gsap';
 import { SubscribeService } from '../subscribe.service';
 import { RouterModule } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -13,29 +14,48 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements AfterViewInit, OnInit {
-  
+
   searchResults: any[] = [];
   searched = false;
-  latestProjects: any[] = []; // ⭐ Add this
+  latestProjects: any[] = [];
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
-    private subscribeService: SubscribeService   // ⭐ Service injected
+    private subscribeService: SubscribeService
   ) {}
 
   ngOnInit() {
-    this.fetchLatestProjects();   // ⭐ Fetch 3 projects on load
+    this.fetchLatestProjects();
   }
 
-  // ⭐ Fetch 3 Latest Projects
   fetchLatestProjects() {
     this.subscribeService.getProjects().subscribe({
       next: (projects) => {
-        this.latestProjects = projects.slice(0, 3); // First 3 projects only
+        this.latestProjects = projects.slice(0, 3);
         console.log("LATEST PROJECTS:", this.latestProjects);
       },
       error: (err) => console.error("Project fetch error:", err)
     });
+  }
+
+  getImage(project: any): string {
+    const baseUrl = environment.apiBaseUrl?.replace('/api', '') || 'http://localhost:3000';
+
+    if (project.gallery?.length) {
+      const img = project.gallery[0];
+      const imageUrl =
+        typeof img === 'string'
+          ? img
+          : img.url || img.filename;
+
+      if (!imageUrl) return 'assets/noimage.jpg';
+
+      if (imageUrl.startsWith('http')) return imageUrl;
+
+      return `${baseUrl}${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`;
+    }
+
+    return 'assets/noimage.jpg';
   }
 
   allProperties = [
@@ -81,12 +101,12 @@ export class HomeComponent implements AfterViewInit, OnInit {
     tl.fromTo(
       lines,
       { opacity: 0, y: y },
-      { opacity: 1, y: 0, duration: time, stagger: 2, ease: "circ.inOut" }
+      { opacity: 1, y: 0, duration: time, stagger: 2, ease: 'circ.inOut' }
     );
 
     tl.to(
       lines,
-      { opacity: 0, y: -y, duration: time, stagger: 2, ease: "circ.inOut", delay: time },
+      { opacity: 0, y: -y, duration: time, stagger: 2, ease: 'circ.inOut', delay: time },
       1.3
     );
   }

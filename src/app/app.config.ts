@@ -17,28 +17,29 @@ import { LoginComponent } from './user/login';
 
 const routes: Routes = [
   {
-    path: '',
-    component: UserComponent,
-    children: [
-      { path: '', component: HomeComponent },
-      { path: 'contact', component: ContactComponent },
-      { path: 'page', component: PageComponent },
-      { path: 'project', component: ProjectComponent },
-      { path: 'single-project/:id', component: SingleProjectComponent },
-      { path: 'login', component: LoginComponent }
-    ]
-  },
-  {
-    path: 'admin',
-    component: AdminComponent,
-    children: [
-      { path: 'user-contactlist', component: UserContactListComponent },
-      { path: 'add-project', component: AddProjectComponent },
-      { path: 'get-project', component: GetProject },
-      { path: 'project/:id', component: SingleComponent },
-      { path: '**', redirectTo: '/' } // optional fallback
-    ]
-  }
+  path: '',
+  component: UserComponent,
+  children: [
+    { path: '', component: HomeComponent },
+    { path: 'contact', component: ContactComponent },
+    { path: 'page', component: PageComponent },
+    { path: 'project', component: ProjectComponent },
+    { path: 'single-project/:id', component: SingleProjectComponent },
+    { path: 'login', component: LoginComponent }
+  ]
+},
+{
+  path: 'admin',
+  component: AdminComponent,
+  children: [
+    { path: 'user-contactlist', component: UserContactListComponent },
+    { path: 'add-project', component: AddProjectComponent },
+    { path: 'get-project', component: GetProject },
+    { path: 'project/:id', component: SingleComponent },
+    { path: '**', redirectTo: '/' }
+  ]
+}
+
 ];
 
 export const appConfig = {

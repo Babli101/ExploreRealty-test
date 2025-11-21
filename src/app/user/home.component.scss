@@ -105,12 +105,15 @@
 
   .line {
     font-size: 40px;
-    color: #fdfeff;
+    color: #f0bc4c;
     letter-spacing: 10px;
     position: absolute;
     opacity: 0;
     width: 100%;
     text-align: center;
+  }
+  img{
+    height: 100px;
   }
 }
 .card-section {

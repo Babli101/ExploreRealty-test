@@ -13,10 +13,10 @@
         <li class="nav-item"><a class="nav-link text-white" routerLink="/">Home</a></li>
         <li class="nav-item"><a class="nav-link text-white" routerLink="/page">About</a></li>
         <li class="nav-item"><a class="nav-link text-white" routerLink="/contact">Contact</a></li>
-        <li class="nav-item"><a class="nav-link text-white" routerLink="/project">Project</a></li>
-
+        
         <!-- ✅ If logged in -->
         <ng-container *ngIf="isLoggedIn; else notLoggedIn">
+          <li class="nav-item"><a class="nav-link text-white" routerLink="/project">Project</a></li>
           <li class="nav-item">
             <a class="nav-link text-white" (click)="logout()">Logout</a>
           </li>

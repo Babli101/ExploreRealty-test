@@ -53,6 +53,7 @@ export interface Project {
   providedIn: 'root'
 })
 export class SubscribeService {
+
   private baseUrl = environment.apiBaseUrl;
 
   private subscribeUrl = `${this.baseUrl}/subscribe`;
@@ -88,10 +89,6 @@ export class SubscribeService {
         if (res?.token) {
           this.auth.login(res.token, res.role || 'user');
 
-          // ✅ Notify AuthService → Navbar will auto-update
-          this.auth.login(res.token, res.role); // ✅ FIXED (2 arguments)
-
-          // ✅ Navigate by role
           if (res.role === 'admin') {
             this.router.navigate(['/admin/get-project']);
           } else {
@@ -102,14 +99,19 @@ export class SubscribeService {
     );
   }
 
-  // Logout
   logout() {
     this.auth.logout();
   }
 
   // Add project
-  addProject(projectData: Partial<Project>, images: FileList | null, brochure: File | null): Observable<Project> {
+  addProject(
+    projectData: Partial<Project>,
+    images: FileList | null,
+    brochure: File | null
+  ): Observable<Project> {
+
     const formData = new FormData();
+
     Object.entries(projectData).forEach(([key, value]) => {
       if (value !== undefined && value !== null) {
         if (typeof value === 'object') {
@@ -130,13 +132,17 @@ export class SubscribeService {
     return this.http.post<Project>(this.apiUrl, formData);
   }
 
+  // Get all projects — **NO URL MODIFICATION**
   getProjects(): Observable<Project[]> {
-    return this.http.get<{ success: boolean; projects: Project[] }>(this.apiUrl)
+    return this.http
+      .get<{ success: boolean; projects: Project[] }>(this.apiUrl)
       .pipe(map(res => res.projects));
   }
 
+  // Get single project — **NO URL MODIFICATION**
   getProjectById(id: string): Observable<Project> {
-    return this.http.get<{ success: boolean; project: Project }>(`${this.apiUrl}/${id}`)
+    return this.http
+      .get<{ success: boolean; project: Project }>(`${this.apiUrl}/${id}`)
       .pipe(map(res => res.project));
   }
 

@@ -36,12 +36,12 @@ export class AddProjectComponent {
       officePrice: [''],
       category: ['', Validators.required],
       status: ['', Validators.required],
+      location: ['', Validators.required],
       location1: [''],
       location2: [''],
       location3: [''],
       location4: [''],
       location5: [''],
-      location: ['', Validators.required],
       mapEmbed: ['']
     });
   }
@@ -50,9 +50,17 @@ export class AddProjectComponent {
     this.selectedCategory = event.target.value;
 
     if (this.selectedCategory === 'residential') {
-      this.addProjectForm.patchValue({ retailPrice: '', officePrice: '' });
+      this.addProjectForm.patchValue({
+        retailPrice: '',
+        officePrice: ''
+      });
     } else if (this.selectedCategory === 'commercial') {
-      this.addProjectForm.patchValue({ price1bhk: '', price2bhk: '', price3bhk: '', price4bhk: '' });
+      this.addProjectForm.patchValue({
+        price1bhk: '',
+        price2bhk: '',
+        price3bhk: '',
+        price4bhk: ''
+      });
     }
   }
 
@@ -71,23 +79,20 @@ export class AddProjectComponent {
     }
 
     const formData = new FormData();
-    const data = { ...this.addProjectForm.value };
+    const data = this.addProjectForm.value;
 
-    // ✅ Append each field individually to FormData
+    // Append normal fields
     for (const key in data) {
       if (data[key] !== undefined && data[key] !== null) {
-        if (typeof data[key] === 'object') {
-          // Nested objects (like location) need to be stringified
-          formData.append(key, JSON.stringify(data[key]));
-        } else {
-          formData.append(key, data[key]);
-        }
+        formData.append(key, data[key]);  // NO JSON.stringify
       }
     }
 
     // Append files
     this.selectedGallery.forEach(file => formData.append('gallery', file));
-    if (this.selectedBrochure) formData.append('brochure', this.selectedBrochure);
+    if (this.selectedBrochure) {
+      formData.append('brochure', this.selectedBrochure);
+    }
 
     this.subscribeService.postProject(formData).subscribe({
       next: () => {

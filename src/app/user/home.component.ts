@@ -39,24 +39,23 @@ export class HomeComponent implements AfterViewInit, OnInit {
   }
 
   getImage(project: any): string {
-    const baseUrl = environment.apiBaseUrl?.replace('/api', '') || 'http://localhost:3000';
+  const baseUrl = environment.publicBaseUrl;
 
-    if (project.gallery?.length) {
-      const img = project.gallery[0];
-      const imageUrl =
-        typeof img === 'string'
-          ? img
-          : img.url || img.filename;
+  if (project.gallery?.length) {
+    const img = project.gallery[0];
+    const imageUrl = img.url || img.filename;
 
-      if (!imageUrl) return 'assets/noimage.jpg';
+    if (!imageUrl) return 'assets/noimage.jpg';
 
-      if (imageUrl.startsWith('http')) return imageUrl;
+    // Full absolute URL
+    if (imageUrl.startsWith('http')) return imageUrl;
 
-      return `${baseUrl}${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`;
-    }
-
-    return 'assets/noimage.jpg';
+    // Final URL build
+    return `${baseUrl}${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`;
   }
+
+  return 'assets/noimage.jpg';
+}
 
   allProperties = [
     { city: 'Delhi', type: 'Buy', price: 120000 },

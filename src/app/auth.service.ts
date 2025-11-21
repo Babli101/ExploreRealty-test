@@ -11,7 +11,7 @@ export class AuthService {
 
   constructor() {}
 
-  // Check token exist
+  // Check if token exists
   private hasToken(): boolean {
     return !!localStorage.getItem('token');
   }
@@ -39,4 +39,5 @@ export class AuthService {
     localStorage.removeItem('role');
     this.loggedIn.next(false);
   }
-}
+
+} // <-- Make sure this is the last line, no extra braces

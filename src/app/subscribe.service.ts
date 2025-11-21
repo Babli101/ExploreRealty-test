@@ -88,6 +88,10 @@ export class SubscribeService {
         if (res?.token) {
           this.auth.login(res.token, res.role || 'user');
 
+          // ✅ Notify AuthService → Navbar will auto-update
+          this.auth.login(res.token, res.role); // ✅ FIXED (2 arguments)
+
+          // ✅ Navigate by role
           if (res.role === 'admin') {
             this.router.navigate(['/admin/get-project']);
           } else {

@@ -22,7 +22,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private subscribeService: SubscribeService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.fetchLatestProjects();
@@ -37,22 +37,26 @@ export class HomeComponent implements AfterViewInit, OnInit {
       error: (err) => console.error("Project fetch error:", err)
     });
   }
-  
-getImage(project: any, index: number = 0): string {
-  const baseUrl = environment.publicBaseUrl;
 
-  if (project.gallery?.length > 0) {
-    const img = project.gallery[index];
-    const imageUrl = img.url || `/uploads/${img.filename}`;
+  getImageUrl(image: any): string {
+    const baseUrl = 'https://explorerealty.onrender.com';  // FIXED
 
-    if (!imageUrl) return 'assets/noimage.jpg';
-    if (imageUrl.startsWith('http')) return imageUrl;
+    if (!image) return 'assets/noimage.jpg';
 
-    return `${baseUrl}${imageUrl}`;
+    const path =
+      typeof image === 'string'
+        ? image
+        : image.url || `/uploads/${image.filename}`;
+
+    if (!path) return 'assets/noimage.jpg';
+
+    // Already absolute URL
+    if (path.startsWith('http')) return path;
+
+    // Ensure correct joining
+    return `${baseUrl}${path}`;
   }
 
-  return 'assets/noimage.jpg';
-}
 
   allProperties = [
     { city: 'Delhi', type: 'Buy', price: 120000 },

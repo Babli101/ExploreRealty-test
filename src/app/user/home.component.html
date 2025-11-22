@@ -96,7 +96,8 @@
       <div class="card project-card h-100 d-flex flex-column">
 
         <!-- ⭐ Image Fixed Using getImage() -->
-        <img [src]="getImage(project, 0)" class="card-img-top img-fluid" alt="Project Image" />
+        <img [src]="getImageUrl(project.gallery[0])" class="img-fluid" alt="Project image" />
+
 
 
         <h4 class="card-title mt-4 ms-3">{{ project.name }}</h4>

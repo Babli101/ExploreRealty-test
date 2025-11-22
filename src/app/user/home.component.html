@@ -96,11 +96,8 @@
       <div class="card project-card h-100 d-flex flex-column">
 
         <!-- ⭐ Image Fixed Using getImage() -->
-        <img 
-          [src]="getImage(project)"
-          class="card-img-top img-fluid"
-          alt="Project Image"
-        >
+        <img [src]="getImage(project, 0)" class="card-img-top img-fluid" alt="Project Image" />
+
 
         <h4 class="card-title mt-4 ms-3">{{ project.name }}</h4>
 
@@ -109,9 +106,7 @@
             {{ project.priceFrom || 'Price on request' }}
           </p>
 
-          <a
-            [routerLink]="['/single-project', project._id]"
-            class="btn my-btn">
+          <a [routerLink]="['/single-project', project._id]" class="btn my-btn">
             Explore Project
           </a>
         </div>

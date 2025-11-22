@@ -37,21 +37,18 @@ export class HomeComponent implements AfterViewInit, OnInit {
       error: (err) => console.error("Project fetch error:", err)
     });
   }
-
-  getImage(project: any): string {
+  
+getImage(project: any, index: number = 0): string {
   const baseUrl = environment.publicBaseUrl;
 
-  if (project.gallery?.length) {
-    const img = project.gallery[0];
-    const imageUrl = img.url || img.filename;
+  if (project.gallery?.length > 0) {
+    const img = project.gallery[index];
+    const imageUrl = img.url || `/uploads/${img.filename}`;
 
     if (!imageUrl) return 'assets/noimage.jpg';
-
-    // Full absolute URL
     if (imageUrl.startsWith('http')) return imageUrl;
 
-    // Final URL build
-    return `${baseUrl}${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`;
+    return `${baseUrl}${imageUrl}`;
   }
 
   return 'assets/noimage.jpg';

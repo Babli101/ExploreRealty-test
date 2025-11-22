@@ -55,7 +55,8 @@ getImage(project: any, index: number = 0): string {
     return path;
   }
 
-  const full = `${baseUrl}${path.startsWith('/') ? '' : '/'}${path}`;
+  const full = `${baseUrl.replace(/\/$/, '')}${path}`;
+
   console.log("DEBUG: Image full URL = ", full);
   return full;
 }

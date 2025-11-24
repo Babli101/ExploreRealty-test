@@ -38,20 +38,21 @@ export class HomeComponent implements AfterViewInit, OnInit {
     });
   }
 
-  getImage(project: any, index: number = 0) {
-    const baseUrl = environment.publicBaseUrl.replace(/\/$/, '');
-
+  getImage(project: any): string {
     if (!project?.gallery?.length) return 'assets/noimage.jpg';
 
-    let img = project.gallery[index];
-    let path = img.url;
+    let img = project.gallery[0];
+    let url = img.url || img.filename;
 
-    if (!path) return 'assets/noimage.jpg';
+    if (!url) return 'assets/noimage.jpg';
 
-    if (path.startsWith('http')) return path;
+    // If full URL (http)
+    if (url.startsWith("http")) return url;
 
-    return `${baseUrl}${path}`;
+    // Fallback for localhost
+    return `${environment.publicBaseUrl}${url}`;
   }
+
 
 
   allProperties = [

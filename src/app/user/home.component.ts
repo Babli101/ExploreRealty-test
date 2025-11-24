@@ -22,7 +22,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private subscribeService: SubscribeService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.fetchLatestProjects();
@@ -37,29 +37,22 @@ export class HomeComponent implements AfterViewInit, OnInit {
       error: (err) => console.error("Project fetch error:", err)
     });
   }
-  
-getImage(project: any, index: number = 0): string {
-  const baseUrl = environment.publicBaseUrl;
 
-  if (!project?.gallery?.length) {
-    return 'assets/noimage.jpg';
+  getImage(project: any, index: number = 0) {
+    const baseUrl = environment.publicBaseUrl.replace(/\/$/, '');
+
+    if (!project?.gallery?.length) return 'assets/noimage.jpg';
+
+    let img = project.gallery[index];
+    let path = img.url;
+
+    if (!path) return 'assets/noimage.jpg';
+
+    if (path.startsWith('http')) return path;
+
+    return `${baseUrl}${path}`;
   }
 
-  const img = project.gallery[index];
-  const path = img.url || `/uploads/${img.filename}`;
-  if (!path) {
-    return 'assets/noimage.jpg';
-  }
-
-  if (path.startsWith('http')) {
-    return path;
-  }
-
-  const full = `${baseUrl.replace(/\/$/, '')}${path}`;
-
-  console.log("DEBUG: Image full URL = ", full);
-  return full;
-}
 
   allProperties = [
     { city: 'Delhi', type: 'Buy', price: 120000 },

@@ -1,34 +1,55 @@
-<nav class="navbar navbar-expand-lg fixed-top navbar-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/">
-      <img src="logo.png" alt="Logo" class="logo" />
-    </a>
+<nav class="bg-gray-800 fixed w-full z-10 top-0 shadow">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+      
+      <!-- Logo -->
+      <div class="flex-shrink-0">
+        <a routerLink="/">
+          <img class="h-20 w-auto" src="logo.png" alt="Logo" />
+        </a>
+      </div>
 
-    <button class="navbar-toggler" type="button" (click)="toggleMenu()">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" [class.show]="isMenuOpen">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link text-white" routerLink="/">Home</a></li>
-        <li class="nav-item"><a class="nav-link text-white" routerLink="/page">About</a></li>
-        <li class="nav-item"><a class="nav-link text-white" routerLink="/contact">Contact</a></li>
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex space-x-4">
+        <a routerLink="/" class="text-white px-3 py-2 rounded-md hover:bg-gray-700 no-underline">Home</a>
+        <a routerLink="/page" class="text-white px-3 py-2 rounded-md hover:bg-gray-700 no-underline">About</a>
+        <a routerLink="/contact" class="text-white px-3 py-2 rounded-md hover:bg-gray-700 no-underline">Contact</a>
         
-        <!-- ✅ If logged in -->
         <ng-container *ngIf="isLoggedIn; else notLoggedIn">
-          <li class="nav-item"><a class="nav-link text-white" routerLink="/project">Project</a></li>
-          <li class="nav-item">
-            <a class="nav-link text-white" (click)="logout()">Logout</a>
-          </li>
+          <a routerLink="/project" class="text-white px-3 py-2 rounded-md hover:bg-gray-700 no-underline">Project</a>
+          <button (click)="logout()" class="text-white px-3 py-2 rounded-md hover:bg-gray-700 no-underline">Logout</button>
         </ng-container>
 
-        <!-- ❌ If not logged in -->
         <ng-template #notLoggedIn>
-          <li class="nav-item">
-            <a class="nav-link text-white" routerLink="/login">Login</a>
-          </li>
+          <a routerLink="/login" class="text-white px-3 py-2 rounded-md hover:bg-gray-700 no-underline">Login</a>
         </ng-template>
-      </ul>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden">
+        <button (click)="toggleMenu()" class="text-gray-300 hover:text-white focus:outline-none focus:text-white">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
     </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div *ngIf="isMenuOpen" class="md:hidden bg-gray-800 px-2 pt-2 pb-3 space-y-1">
+    <a routerLink="/" class="block text-white px-3 py-2 rounded-md hover:bg-gray-700 no-underline">Home</a>
+    <a routerLink="/page" class="block text-white px-3 py-2 rounded-md hover:bg-gray-700 no-underline">About</a>
+    <a routerLink="/contact" class="block text-white px-3 py-2 rounded-md hover:bg-gray-700 no-underline">Contact</a>
+
+    <ng-container *ngIf="isLoggedIn; else notLoggedInMobile">
+      <a routerLink="/project" class="block text-white px-3 py-2 rounded-md hover:bg-gray-700 no-underline">Project</a>
+      <button (click)="logout()" class="block text-white px-3 py-2 rounded-md hover:bg-gray-700 w-full text-left no-underline">Logout</button>
+    </ng-container>
+
+    <ng-template #notLoggedInMobile>
+      <a routerLink="/login" class="block text-white px-3 py-2 rounded-md hover:bg-gray-700 no-underline">Login</a>
+    </ng-template>
   </div>
 </nav>

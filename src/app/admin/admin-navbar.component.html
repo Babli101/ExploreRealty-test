@@ -1,22 +1,44 @@
+<nav class="bg-gray-900 fixed w-full z-50 top-0 shadow-lg">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
 
-<nav class="navbar navbar-expand-lg fixed-top navbar-light ">
-  <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/dashboard"><img src="logo-1.png" alt="Logo" class="logo" /></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse justify-content-end navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ">
-        <li class="nav-item">
-          <a class="nav-link text-white active" aria-current="page" routerLink="/dashboard">Dashboard</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white active" aria-current="page" routerLink="/admin/get-project">Projects</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" (click)="logout()">Logout</a>
-        </li>
-      </ul>
+      <!-- Logo -->
+      <div class="flex-shrink-0">
+        <a routerLink="/dashboard" class="inline-block">
+          <img src="logo-1.png" alt="Logo" class="h-12 w-auto" />
+        </a>
+      </div>
+
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex space-x-6">
+        <a routerLink="/dashboard"
+          class="text-white px-3 py-2 rounded-md hover:bg-gray-700 font-semibold decoration-none">Dashboard</a>
+        <a routerLink="/admin/get-project"
+          class="text-white px-3 py-2 rounded-md hover:bg-gray-700 font-semibold decoration-none">Projects</a>
+        <button (click)="logout()"
+          class="text-white px-3 py-2 rounded-md hover:bg-gray-700 font-semibold">Logout</button>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden">
+        <button (click)="toggleMenu()" class="text-gray-300 hover:text-white focus:outline-none">
+          <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
     </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div *ngIf="isMenuOpen"
+    class="md:hidden bg-gray-900 px-4 pt-4 pb-4 space-y-2 transition-all duration-300 ease-in-out">
+    <a routerLink="/dashboard"
+      class="block text-white px-3 py-2 rounded-md hover:bg-gray-700 font-semibold decoration-none">Dashboard</a>
+    <a routerLink="/admin/get-project"
+      class="block text-white px-3 py-2 rounded-md hover:bg-gray-700 font-semibold decoration-none">Projects</a>
+    <button (click)="logout()"
+      class="block text-white px-3 py-2 rounded-md hover:bg-gray-700 font-semibold w-full text-left">Logout</button>
   </div>
 </nav>

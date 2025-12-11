@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'https://explorerealty.onrender.com/api',
-  publicBaseUrl: 'https://explorerealty.onrender.com'
+  apiBaseUrl: 'https://api-vert-omega-98.vercel.app/api',
+  publicBaseUrl: 'https://api-vert-omega-98.vercel.app'
 };
 

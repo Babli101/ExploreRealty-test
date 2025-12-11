@@ -56,7 +56,7 @@ export class SubscribeService {
 
   private baseUrl = environment.apiBaseUrl;
 
-  private subscribeUrl = `${this.baseUrl}/subscribe`;
+  private subscribeUrl = `${this.baseUrl}/subscriber`;
   private contactUrl = `${this.baseUrl}/contact`;
   private apiUrl = `${this.baseUrl}/projects`;
   private authUrl = `${this.baseUrl}/auth`;

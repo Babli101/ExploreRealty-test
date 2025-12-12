@@ -1,67 +1,151 @@
+/* --------------------------------- */
+/* Hero Section */
+/* --------------------------------- */
 .hero-section {
+  position: relative;
   height: 70vh;
   overflow: hidden;
-  position: relative;
 
-  img {
+  .hero-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    z-index: 0;
+    position: relative;
   }
 
-  h1,
-  p {
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.35); // semi-transparent black
+    z-index: 1;
+  }
+
+  .contant {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    text-align: center;
     color: #fff;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+
+    .welcome {
+      font-family: sans-serif;
+      text-transform: uppercase;
+      white-space: nowrap;
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: 8px;
+      margin-bottom: 20px;
+      animation: smoothText 6s ease-in-out infinite;
+    }
+
+    .muzile {
+      font-size: 30px;
+      color: #fafbfc;
+    }
+  }
+
+  @keyframes smoothText {
+    0% { transform: translateY(-10px); letter-spacing: 5px; }
+    25% { transform: translateY(0); letter-spacing: 12px; opacity: 1; }
+    50% { transform: translateY(0); letter-spacing: 15px; opacity: 1; }
+    75% { transform: translateY(0); letter-spacing: 10px; opacity: 1; }
+    100% { transform: translateY(10px); letter-spacing: 5px; opacity: 0.6; }
   }
 }
 
-.card-section{
-  background: none;
-}
+/* --------------------------------- */
+/* Floating Cards Over Hero */
+/* --------------------------------- */
 .card-section {
-  .feature-icon {
-    font-size: 2.5rem;
-    color: #004b4e;
-  }
+  position: relative;
+  margin-top: -60px; // pulls the cards over hero
+  z-index: 3; // above overlay
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  padding: 0 1rem;
 
   .property-card {
     background: #fff;
     border-radius: 12px;
+    text-align: center;
+    padding: 1.5rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     transition: all 0.3s ease;
 
     &:hover {
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
       transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      color: #0c1e2c;
+      margin-bottom: 0.5rem;
+    }
+
+    h6 {
+      font-weight: 600;
+      margin: 0;
     }
   }
 }
-// about
-.container-fluid {
+
+/* --------------------------------- */
+/* Content Changer Carousel */
+/* --------------------------------- */
+.content-changer {
+  font-family: Montserrat;
   display: flex;
-  align-items: flex-start;
-  gap: 20px; 
-  margin-bottom: 10px;
+  height: 40vh;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: #0e1c29;
 
-  .image-box {
-    background: #fff5cc; 
-    padding: 20px;
-    width: 300px; 
-    img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
+  .line {
+    position: absolute; // float effect
+    width: 100%;
+    text-align: center;
+    font-size: 40px;
+    color: #f0bc4c;
+    letter-spacing: 10px;
+    opacity: 0;
+    animation: floatLines 6s ease-in-out infinite;
   }
 
-  .contact-box {
-    background: #ffe5d5; 
-    padding: 20px;
-    flex: 1; 
-    h2 {
-      margin-top: 0;
-    }
+  .line img {
+    display: inline-block; /* ensures the image is centered inside line */
+    margin: 0 auto;
+    height: 100px;
+    vertical-align: middle;
   }
+}
+
+@keyframes zoomIn {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slideLeft {
+  0% { transform: translateX(100px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Tailwind-style classes */
+.animate-fadeIn {
+  animation: fadeIn 1s ease forwards;
 }
 
 

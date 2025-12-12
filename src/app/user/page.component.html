@@ -1,78 +1,223 @@
-<section class="hero-section position-relative text-white">
-  <img src="img/ats-15.jpg" class="w-100" style="height: 70vh; object-fit: cover;" alt="Hero Image">
+<!-- Hero Section -->
+<section class="hero-section relative text-white">
+  <img src="img/trac-vu-mhtIv0bE4sg-unsplash.jpg" class="w-100 hero-img" alt="Hero Image">
+
+  <!-- Black Overlay -->
+  <div class="overlay"></div>
 
   <!-- Overlay Text -->
-  <div class="position-absolute top-50 start-50 translate-middle text-center">
-    <h1 class="display-5 fw-bold">Find Your Perfect Residential & Commercial Space</h1>
-    <p class="lead">• Explore Realty •</p>
+  <div class="contant">
+    <span class="welcome">ABOUT</span>
   </div>
 </section>
 
-<!-- Card Section - FLOATING OVER IMAGE -->
-<section class="card-section position-relative mb-5" style="margin-top: -60px; z-index: 10;">
-  <div class="container">
-    <div class="row justify-content-center ">
-      <!-- Card 1 -->
-      <div class="col-6 col-md-3">
-        <div class="property-card text-center p-3 rounded">
-          <i class="bi bi-house-door feature-icon mb-3"></i>
-          <h6>High Rise Properties</h6>
-        </div>
-      </div>
-      <!-- Card 2 -->
-      <div class="col-6 col-md-3">
-        <div class="property-card text-center p-3 rounded">
-          <i class="bi bi-buildings feature-icon mb-3"></i>
-          <h6>Commercial Properties</h6>
-        </div>
-      </div>
-      <!-- Card 3 -->
-      <div class="col-6 col-md-3">
-        <div class="property-card text-center p-3 rounded">
-          <i class="bi bi-tree feature-icon mb-3"></i>
-          <h6>Plot & Bungalow</h6>
-        </div>
-      </div>
-      <!-- Card 4 -->
-      <div class="col-6 col-md-3">
-        <div class="property-card text-center p-3 rounded">
-          <i class="bi bi-building feature-icon mb-3"></i>
-          <h6>Dealers Floor</h6>
-        </div>
-      </div>
+<!-- Card Section - FLOATING OVER HERO -->
+<section class="card-section hidden md:block">
+  <div class="container grid grid-cols-2 md:grid-cols-4 gap-6">
+    <div class="property-card text-center p-6 rounded bg-white shadow-lg">
+      <i class="bi bi-house-door feature-icon mb-3 text-2xl"></i>
+      <h6 class="font-semibold">High Rise Properties</h6>
+    </div>
+    <div class="property-card text-center p-6 rounded bg-white shadow-lg">
+      <i class="bi bi-buildings feature-icon mb-3 text-2xl"></i>
+      <h6 class="font-semibold">Commercial Properties</h6>
+    </div>
+    <div class="property-card text-center p-6 rounded bg-white shadow-lg">
+      <i class="bi bi-tree feature-icon mb-3 text-2xl"></i>
+      <h6 class="font-semibold">Plot & Bungalow</h6>
+    </div>
+    <div class="property-card text-center p-6 rounded bg-white shadow-lg">
+      <i class="bi bi-buildings feature-icon mb-3 text-2xl"></i>
+      <h6 class="font-semibold">Dealers Floor</h6>
     </div>
   </div>
 </section>
 
-<!-- testimonial  -->
-    
-<section class="testimonial-section container-fluid ">
-  <div class="row align-items-center">
-    <!-- Image Column -->
-    <div class="col-12 col-md-7 position-relative">
-      <img src="img/about/about.jpg" alt="Client" class="img-fluid rounded shadow testimonial-img">
+<section class="py-8 bg-white">
+  <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center gap-8">
+
+    <!-- Left: Image -->
+    <div class="md:w-1/2 w-full flex justify-center">
+      <img src="img/home2.webp" alt="Mission Image" class="w-full max-h-[500px] object-cover rounded-xl shadow-lg" />
     </div>
 
-    <!-- Content Column -->
-    <div class="col-12 col-md-5 offset-md-0  position-relative">
-      <div class="testimonial-content p-4 shadow rounded">
-        <h2>About</h2>
-        <p>
-          At Elite Partners spaces, we believe finding the right property is more than just a
-            transaction — it's
-            a life-changing experience. With years of experience in the real estate industry, our mission is
-            to connect people with the
-            spaces where they can thrive — whether it's a family home, a growing business’s new office, or a
-            promising investment opportunity.
-        </p>
-        <p>
-            What sets us apart is our deep market knowledge, client-first approach, and
-            unwavering commitment to
-            transparency and service. We work closely with buyers, sellers, landlords, and investors —
-            helping
-            them make informed, confident decisions.
-        </p>
+    <!-- Right: Content -->
+    <div class="md:w-1/2 w-full flex flex-col justify-center">
+      <!-- Mission -->
+      <h2 class="text-3xl font-bold text-[#0e1c29] mb-4">Our Mission</h2>
+      <p class="text-gray-700 mb-6">
+        At (Your Company name), our mission is to provide premium real estate solutions that connect people with their
+        dream spaces.
+        We focus on trust, professionalism, and seamless experiences for every client.
+      </p>
+      <ul class="space-y-3 mb-8">
+        <li class="flex items-start gap-3">
+          <span class="text-[#f0bc4c] text-xl">•</span>
+          <span class="text-gray-700">Deliver top-notch property listings with verified quality.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-[#f0bc4c] text-xl">•</span>
+          <span class="text-gray-700">Ensure smooth transactions for buyers, sellers, and renters.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-[#f0bc4c] text-xl">•</span>
+          <span class="text-gray-700">Maintain transparency and trust in every interaction.</span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section class="relative py-6 w-full h-[50vh] md:h-[80vh] overflow-hidden">
+  <div class="relative w-full h-full">
+
+    <div *ngFor="let slide of slides; let i = index" class="absolute inset-0 transition-opacity duration-1000"
+      [class.opacity-100]="i === currentIndex" [class.opacity-0]="i !== currentIndex">
+      <!-- Background Image -->
+      <img [src]="slide.image" class="w-full h-full object-cover" />
+
+      <!-- Overlay -->
+      <div class="absolute inset-0 bg-black/40"></div>
+
+      <!-- Caption -->
+      <h2 class="absolute inset-0 flex items-center justify-center text-white font-bold text-3xl md:text-5xl opacity-0"
+        [ngClass]="{
+    'animate-zoomIn': i === currentIndex && slide.animation === 'zoomIn',
+    'animate-slideLeft': i === currentIndex && slide.animation === 'slideLeft',
+    'animate-fadeIn': i === currentIndex && slide.animation === 'fadeIn'
+  }">
+        {{ slide.caption }}
+      </h2>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- Vision Section -->
+<section class="py-4 bg-white">
+  <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center gap-8">
+
+    <!-- Left: Content -->
+    <div class="md:w-1/2 w-full flex flex-col justify-center md:order-1">
+      <h2 class="text-3xl font-bold text-[#0e1c29] mb-4">Our Vision</h2>
+      <p class="text-gray-700 mb-6">
+        Our vision is to be the leading real estate company known for innovation, client satisfaction, and sustainable
+        growth.
+        We aim to create spaces that inspire, connect, and add value to the community.
+      </p>
+      <ul class="space-y-3">
+        <li class="flex items-start gap-3">
+          <span class="text-[#f0bc4c] text-xl">•</span>
+          <span class="text-gray-700">Innovate continuously to provide modern real estate solutions.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-[#f0bc4c] text-xl">•</span>
+          <span class="text-gray-700">Enhance customer satisfaction through personalized services.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-[#f0bc4c] text-xl">•</span>
+          <span class="text-gray-700">Promote sustainable and responsible development practices.</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Right: Image -->
+    <div class="md:w-1/2 w-full flex justify-center md:order-2">
+      <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511" alt="Vision Image"
+        class="w-full max-h-[500px] object-cover rounded-xl shadow-lg" />
+    </div>
+
+  </div>
+</section>
+
+<div class="content-changer mb-5">
+  <div class="line text-center">Add your</div>
+  <div class="line text-center">property</div>
+  <div class="line text-center">for sale.</div>
+  <div class="line text-center">+91 9887654321</div>
+  <div class="line text-center">
+    <img src="logo-1.png" alt="">
+  </div>
+</div>
+
+<section class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-4">
+    <!-- Heading -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-[#0e1c29]">Our Agents</h2>
+      <p class="text-gray-600 italic mt-2">Meet our dedicated team who make things happen</p>
+    </div>
+
+    <!-- Swiper Slider -->
+    <div class="swiper myAgentsSwiper">
+      <div class="swiper-wrapper">
+
+        <!-- Agent 1 -->
+        <div class="swiper-slide p-4">
+          <div class="bg-white shadow-lg rounded-xl p-6 text-center">
+            <img class="w-24 h-24 mx-auto rounded-full object-cover mb-4"
+              src="https://randomuser.me/api/portraits/men/32.jpg" alt="Agent 1">
+            <h5 class="text-[#0e1c29] font-semibold text-lg mb-1">John Doe</h5>
+            <p class="text-gray-600 text-sm">Senior Agent</p>
+          </div>
+        </div>
+
+        <!-- Agent 2 -->
+        <div class="swiper-slide p-4">
+          <div class="bg-white shadow-lg rounded-xl p-6 text-center">
+            <img class="w-24 h-24 mx-auto rounded-full object-cover mb-4"
+              src="https://randomuser.me/api/portraits/women/44.jpg" alt="Agent 2">
+            <h5 class="text-[#0e1c29] font-semibold text-lg mb-1">Jane Smith</h5>
+            <p class="text-gray-600 text-sm">Property Consultant</p>
+          </div>
+        </div>
+
+        <!-- Agent 3 -->
+        <div class="swiper-slide p-4">
+          <div class="bg-white shadow-lg rounded-xl p-6 text-center">
+            <img class="w-24 h-24 mx-auto rounded-full object-cover mb-4"
+              src="https://randomuser.me/api/portraits/men/56.jpg" alt="Agent 3">
+            <h5 class="text-[#0e1c29] font-semibold text-lg mb-1">Robert Brown</h5>
+            <p class="text-gray-600 text-sm">Real Estate Expert</p>
+          </div>
+        </div>
+
+        <!-- Agent 4 -->
+        <div class="swiper-slide p-4">
+          <div class="bg-white shadow-lg rounded-xl p-6 text-center">
+            <img class="w-24 h-24 mx-auto rounded-full object-cover mb-4"
+              src="https://randomuser.me/api/portraits/women/68.jpg" alt="Agent 4">
+            <h5 class="text-[#0e1c29] font-semibold text-lg mb-1">Emily Clark</h5>
+            <p class="text-gray-600 text-sm">Property Advisor</p>
+          </div>
+        </div>
+
+        <!-- Agent 5 -->
+        <div class="swiper-slide p-4">
+          <div class="bg-white shadow-lg rounded-xl p-6 text-center">
+            <img class="w-24 h-24 mx-auto rounded-full object-cover mb-4"
+              src="https://randomuser.me/api/portraits/men/72.jpg" alt="Agent 5">
+            <h5 class="text-[#0e1c29] font-semibold text-lg mb-1">Michael Lee</h5>
+            <p class="text-gray-600 text-sm">Sales Executive</p>
+          </div>
+        </div>
+
+        <!-- Agent 6 -->
+        <div class="swiper-slide p-4">
+          <div class="bg-white shadow-lg rounded-xl p-6 text-center">
+            <img class="w-24 h-24 mx-auto rounded-full object-cover mb-4"
+              src="https://randomuser.me/api/portraits/women/79.jpg" alt="Agent 6">
+            <h5 class="text-[#0e1c29] font-semibold text-lg mb-1">Sophia Turner</h5>
+            <p class="text-gray-600 text-sm">Client Relations</p>
+          </div>
+        </div>
+
       </div>
+
+      <!-- Pagination -->
+      <div class="swiper-pagination mt-4"></div>
     </div>
   </div>
 </section>

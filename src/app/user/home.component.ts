@@ -6,6 +6,10 @@ import { SubscribeService } from '../subscribe.service';
 import { RouterModule } from '@angular/router';
 import { environment } from '../../environments/environment';
 
+// Swiper imports
+import Swiper from 'swiper';
+import { Autoplay, Pagination } from 'swiper/modules';
+
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -18,6 +22,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
   searchResults: any[] = [];
   searched = false;
   latestProjects: any[] = [];
+  latestProperty: any[] = [];
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -26,6 +31,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     this.fetchLatestProjects();
+    this.fetchLatestProperty();
   }
 
   fetchLatestProjects() {
@@ -38,6 +44,16 @@ export class HomeComponent implements AfterViewInit, OnInit {
     });
   }
 
+  fetchLatestProperty(){
+    this.subscribeService.getProperty().subscribe({
+      next:(property)=>{
+        this.latestProperty = property.slice(0, 3);
+        console.log('Latest Property:', this.latestProperty);
+      },
+      error:(err)=> console.error("Property fetch error:", err)
+    });
+  }
+
   getImage(project: any, index: number = 0) {
     const baseUrl = environment.publicBaseUrl.replace(/\/$/, '');
 
@@ -47,12 +63,10 @@ export class HomeComponent implements AfterViewInit, OnInit {
     let path = img.url;
 
     if (!path) return 'assets/noimage.jpg';
-
     if (path.startsWith('http')) return path;
 
     return `${baseUrl}${path}`;
   }
-
 
   allProperties = [
     { city: 'Delhi', type: 'Buy', price: 120000 },
@@ -78,12 +92,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
     });
   }
 
-  ngAfterViewInit() {
-    if (isPlatformBrowser(this.platformId)) {
-      this.animateLines();
-    }
-  }
-
+  // ====================content changer start=============================
   private animateLines() {
     if (!isPlatformBrowser(this.platformId)) return;
 
@@ -105,5 +114,33 @@ export class HomeComponent implements AfterViewInit, OnInit {
       { opacity: 0, y: -y, duration: time, stagger: 2, ease: 'circ.inOut', delay: time },
       1.3
     );
+  }
+  // ====================content changer end=============================
+
+
+  // 🔥 SINGLE ngAfterViewInit (no duplication)
+  ngAfterViewInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.animateLines();
+      this.initSwiper();
+    }
+  }
+
+  // Swiper init
+  private initSwiper() {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    new Swiper('.mySwiper', {
+      modules: [Autoplay, Pagination],
+      loop: true,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+    });
   }
 }

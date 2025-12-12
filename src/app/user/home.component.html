@@ -74,7 +74,46 @@
     No properties found matching your criteria.
   </div>
 </section>
+<!-- =================latest properties==================== -->
+<section class="container my-5">
+  <div class="row">
+    <h1>Latest properties</h1>
+    <hr class="color">
 
+    <div class="col-md-4" *ngFor="let property of latestProperty">
+      <div class="card property-card h-100 d-flex flex-column">
+
+        <!-- ⭐ Image Fixed Using getImage() -->
+        <img [src]="getImage(property, 0)" alt="property image" class="img-fluid" />
+        <h4 class="card-title mt-4 ms-3">{{ property.name }}</h4>
+
+        <div class="card-body d-flex justify-content-between align-items-center mt-auto">
+          <p class="price mt-2">
+            {{ property.priceFrom || 'Price on request' }}
+          </p>
+
+          <a [routerLink]="['/single-property', property._id]" class="btn my-btn">
+            Explore property
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="content-changer mb-5">
+  <div class="line text-center">Discover Inspiring Spaces</div>
+  <div class="line text-center">Residential Comfort,</div>
+  <div class="line text-center">Commercial Success with</div>
+  <div class="line text-center">Explore Realty.</div>
+  <div class="line text-center">
+    <img src="logo-1.png" alt="">
+  </div>
+</div>
+
+<!-- =================latest projects==================== -->
 <section class="container my-5">
   <div class="row">
     <h1>Latest Project</h1>
@@ -103,79 +142,149 @@
   </div>
 </section>
 
-
-
-<div class="content-changer mb-5">
-  <div class="line text-center">Discover Inspiring Spaces</div>
-  <div class="line text-center">Residential Comfort,</div>
-  <div class="line text-center">Commercial Success with</div>
-  <div class="line text-center">Explore Realty.</div>
-  <div class="line text-center">
-    <img src="logo-1.png" alt="">
-  </div>
-</div>
-
-<!-- <section class="h40">
-  <img src="img/ats-20.jpg" alt="">
-</section> -->
-
 <!-- testimonial -->
-<section class="testimonial-section py-5">
-  <div class="container">
-    <div class="row text-center mb-5">
-      <div class="col">
-        <h2 class="section-title">Explore our Real Estate Services</h2>
-        <p class="section-subtitle">We proudly collaborate with the best in the industry</p>
-      </div>
+<section class="bg-[#f5f3f0] py-16 px-4">
+  <div class="max-w-7xl mx-auto">
+
+    <!-- Section Heading -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-semibold text-[#0c1e2c] tracking-wide">
+        Explore our Real Estate Services
+      </h2>
+      <p class="text-gray-600 italic mt-2">
+        We proudly collaborate with the best in the industry
+      </p>
     </div>
 
-    <div class="row g-4">
-      <div class="col-md-3">
-        <div class="testimonial-card p-4 h-100 text-center">
-          <h5 class="client-type mb-3">Builders / Developers</h5>
-          <div class="icon-box mb-4">
-            <i class="bi bi-person-workspace"></i>
-          </div>
-          <p class="testimonial-text">“Elite Partners made finding office space simple & professional.”</p>
-          <a class="btn btn-outline-light mt-3">Read More</a>
+    <!-- Cards Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+
+      <!-- Card 1 -->
+      <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 text-center 
+                  transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+        <h5 class="font-semibold text-lg text-[#0c1e2c] mb-3">Builders / Developers</h5>
+
+        <div class="text-5xl text-[#c1975b] mb-4">
+          <i class="bi bi-person-workspace"></i>
         </div>
+
+        <p class="text-gray-700 italic text-sm">
+          “Elite Partners made finding office space simple & professional.”
+        </p>
       </div>
 
-      <div class="col-md-3">
-        <div class="testimonial-card p-4 h-100 text-center">
-          <h5 class="client-type mb-3">Architects / Architecture</h5>
-          <div class="icon-box mb-4">
-            <i class="bi bi-building"></i>
-          </div>
-          <p class="testimonial-text">“Smooth and stress-free experience. Highly recommend Elite!”</p>
-          <a class="btn btn-outline-light mt-3">Read More</a>
+      <!-- Card 2 -->
+      <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 text-center 
+                  transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+        <h5 class="font-semibold text-lg text-[#0c1e2c] mb-3">Architects / Architecture</h5>
+
+        <div class="text-5xl text-[#c1975b] mb-4">
+          <i class="bi bi-building"></i>
         </div>
+
+        <p class="text-gray-700 italic text-sm">
+          “Smooth and stress-free experience. Highly recommend Elite!”
+        </p>
       </div>
 
-      <div class="col-md-3">
-        <div class="testimonial-card p-4 h-100 text-center">
-          <h5 class="client-type mb-3">Agents / Brokers</h5>
-          <div class="icon-box mb-4">
-            <i class="bi bi-person-raised-hand"></i>
-          </div>
-          <p class="testimonial-text">“Hassle-free buy, sell & rent support — true professionals.”</p>
-          <a class="btn btn-outline-light mt-3">Read More</a>
+      <!-- Card 3 -->
+      <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 text-center 
+                  transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+        <h5 class="font-semibold text-lg text-[#0c1e2c] mb-3">Agents / Brokers</h5>
+
+        <div class="text-5xl text-[#c1975b] mb-4">
+          <i class="bi bi-person-raised-hand"></i>
         </div>
+
+        <p class="text-gray-700 italic text-sm">
+          “Hassle-free buy, sell & rent support — true professionals.”
+        </p>
       </div>
 
-      <div class="col-md-3">
-        <div class="testimonial-card p-4 h-100 text-center">
-          <h5 class="client-type mb-3">Interior Decorators</h5>
-          <div class="icon-box mb-4">
-            <i class="bi bi-palette"></i>
-          </div>
-          <p class="testimonial-text">“Quick response and premium listings — loved working with them.”</p>
-          <a class="btn btn-outline-light mt-3">Read More</a>
+      <!-- Card 4 -->
+      <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 text-center 
+                  transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+        <h5 class="font-semibold text-lg text-[#0c1e2c] mb-3">Interior Decorators</h5>
+
+        <div class="text-5xl text-[#c1975b] mb-4">
+          <i class="bi bi-palette"></i>
         </div>
+
+        <p class="text-gray-700 italic text-sm">
+          “Quick response and premium listings — loved working with them.”
+        </p>
       </div>
+
     </div>
   </div>
 </section>
+
+<section class="py-16 bg-[#0e1c29]">
+  <h2 class="text-center text-3xl md:text-4xl font-bold mb-12 text-[#f0bc4c]">
+    What Our Clients Say
+  </h2>
+
+  <div class="swiper mySwiper w-full max-w-5xl mx-auto px-4">
+    <div class="swiper-wrapper">
+
+      <!-- Slide 1 -->
+      <div class="swiper-slide">
+        <div class="rounded-2xl p-6 text-center">
+          <img 
+            src="https://randomuser.me/api/portraits/men/32.jpg" 
+            class="w-20 h-20 rounded-full mx-auto mb-4 object-cover border-2 border-[#f0bc4c]"
+          />
+          <h3 class="text-xl font-semibold text-[#f0bc4c]">Rahul Verma</h3>
+          <p class="text-sm text-[#f0bc4c] mb-4">Business Owner</p>
+
+          <p class="text-white leading-relaxed">
+            “Explore Realty helped me find the perfect commercial space in Gurgaon. 
+            Super professional team and smooth process!”
+          </p>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="swiper-slide">
+        <div class="rounded-2xl p-6 text-center">
+          <img 
+            src="https://randomuser.me/api/portraits/women/45.jpg" 
+            class="w-20 h-20 rounded-full mx-auto mb-4 object-cover border-2 border-[#f0bc4c]"
+          />
+          <h3 class="text-xl font-semibold text-[#f0bc4c]">Sneha Kapoor</h3>
+          <p class="text-sm text-[#f0bc4c] mb-4">IT Professional</p>
+
+          <p class="text-white leading-relaxed">
+            “Amazing service! They helped me get my dream home in Noida within my budget.
+            Highly recommended!”
+          </p>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="swiper-slide">
+        <div class="rounded-2xl p-6 text-center">
+          <img 
+            src="https://randomuser.me/api/portraits/men/12.jpg" 
+            class="w-20 h-20 rounded-full mx-auto mb-4 object-cover border-2 border-[#f0bc4c]"
+          />
+          <h3 class="text-xl font-semibold text-[#f0bc4c]">Arjun Mehta</h3>
+          <p class="text-sm text-[#f0bc4c] mb-4">Entrepreneur</p>
+
+          <p class="text-white leading-relaxed">
+            “Very smooth experience with transparent communication.  
+            I found a great rental apartment in just 2 days!”
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Pagination -->
+    <div class="swiper-pagination mt-6"></div>
+  </div>
+</section>
+
 
 
 <!-- Featured property Agents -->
@@ -191,10 +300,6 @@
           <div class="overlay-content">
             <h4>Bologna</h4>
             <p>Emilia-Romagna Region, Italy</p>
-            <div class="mt-auto">
-              <a href="#" class="btn btn-outline-dark btn-sm me-2">Read More</a>
-              <a href="#" class="btn btn-outline-dark btn-sm">Book a Trip</a>
-            </div>
           </div>
         </div>
       </div>
@@ -206,10 +311,6 @@
           <div class="overlay-content">
             <h4>Bologna</h4>
             <p>Emilia-Romagna Region, Italy</p>
-            <div class="mt-auto">
-              <a href="#" class="btn btn-outline-dark btn-sm me-2">Read More</a>
-              <a href="#" class="btn btn-outline-dark btn-sm">Book a Trip</a>
-            </div>
           </div>
         </div>
       </div>
@@ -220,60 +321,38 @@
           <div class="overlay-content">
             <h4>Bologna</h4>
             <p>Emilia-Romagna Region, Italy</p>
-            <div class="mt-auto">
-              <a href="#" class="btn btn-outline-dark btn-sm me-2">Read More</a>
-              <a href="#" class="btn btn-outline-dark btn-sm">Book a Trip</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Row 2 -->
-      <!-- card 4  -->
-      <div class="col-md-6 col-lg-4">
-        <div class="agent-card h-100 d-flex flex-column">
-          <img src="img/ats-20.jpg" class="card-image" />
-          <div class="overlay-content">
-            <h4>Bologna</h4>
-            <p>Emilia-Romagna Region, Italy</p>
-            <div class="mt-auto">
-              <a href="#" class="btn btn-outline-dark btn-sm me-2">Read More</a>
-              <a href="#" class="btn btn-outline-dark btn-sm">Book a Trip</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- card 5  -->
-      <div class="col-md-6 col-lg-4">
-        <div class="agent-card h-100 d-flex flex-column">
-          <img src="img/home18.jpg" class="card-image" />
-          <div class="overlay-content">
-            <h4>Bologna</h4>
-            <p>Emilia-Romagna Region, Italy</p>
-            <div class="mt-auto">
-              <a href="#" class="btn btn-outline-dark btn-sm me-2">Read More</a>
-              <a href="#" class="btn btn-outline-dark btn-sm">Book a Trip</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- card 6  -->
-      <div class="col-md-6 col-lg-4">
-        <div class="agent-card h-100 d-flex flex-column">
-          <img src="img/brian-babb-XbwHrt87mQ0-unsplash.jpg" class="card-image" />
-          <div class="overlay-content">
-            <h4>Bologna</h4>
-            <p>Emilia-Romagna Region, Italy</p>
-            <div class="mt-auto">
-              <a href="#" class="btn btn-outline-dark btn-sm me-2">Read More</a>
-              <a href="#" class="btn btn-outline-dark btn-sm">Book a Trip</a>
-            </div>
           </div>
         </div>
       </div>
 
     </div>
+  </div>
+</section>
+<section class="px-8 pb-8 bg-white">
+  <h1 class="text-center text-3xl font-extrabold uppercase mb-8 border-t-8 border-[#0c1e2c] pt-4">
+  </h1>
+
+  <div class="gallery max-w-5xl mx-auto h-[450px] flex gap-4">
+    
+    <div class="gallery-panel flex-1 rounded-xl overflow-hidden cursor-pointer transition-all duration-500">
+      <img src="img/home2.webp" alt="Smiling Face" class="w-full h-full object-cover transition-transform duration-500">
+    </div>
+
+    <div class="gallery-panel flex-1 rounded-xl overflow-hidden cursor-pointer transition-all duration-500">
+      <img src="img/home4.jpg" alt="Smiling Face" class="w-full h-full object-cover transition-transform duration-500 scale-[1.15]">
+    </div>
+
+    <div class="gallery-panel flex-1 rounded-xl overflow-hidden cursor-pointer transition-all duration-500">
+      <img src="img/home8.jpg" alt="Smiling Face" class="w-full h-full object-cover transition-transform duration-500">
+    </div>
+
+    <div class="gallery-panel flex-1 rounded-xl overflow-hidden cursor-pointer transition-all duration-500">
+      <img src="img/home9.jpg" alt="Smiling Face" class="w-full h-full object-cover transition-transform duration-500">
+    </div>
+
+    <div class="gallery-panel flex-1 rounded-xl overflow-hidden cursor-pointer transition-all duration-500">
+      <img src="img/Upper-Floors.jpg" alt="Smiling Face" class="w-full h-full object-cover transition-transform duration-500 scale-[1.25]">
+    </div>
+
   </div>
 </section>

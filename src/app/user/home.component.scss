@@ -4,6 +4,15 @@
 .color {
   border-top: 2px solid #0e1c29;
 }
+a{
+  text-decoration: none !important;
+}
+.testimonialRtlSwiper {
+  overflow: hidden;
+}
+.testimonialRtlSwiper {
+  direction: rtl;
+}
 
 /* --------------------------------- */
 /* Hero Section */
@@ -219,58 +228,6 @@
 }
 
 /* --------------------------------- */
-/* Testimonial Section */
-/* --------------------------------- */
-.testimonial-section {
-  background-color: #f5f3f0;
-  padding: 4rem 1rem;
-
-  .section-title {
-    font-size: 2.2rem;
-    font-weight: 600;
-    color: #0c1e2c;
-    text-align: center;
-    letter-spacing: 1px;
-  }
-
-  .section-subtitle {
-    color: #7a7a7a;
-    font-size: 1rem;
-    font-style: italic;
-    text-align: center;
-    margin-bottom: 3rem;
-  }
-
-  .testimonial-card {
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-    transition: 0.3s ease;
-    border: 1px solid #eaeaea;
-    padding: 2rem;
-
-    &:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-    }
-
-    .client-type { color: #0c1e2c; font-weight: 600; font-size: 1.1rem; }
-    .icon-box { font-size: 2.8rem; color: #c1975b; margin-bottom: 1rem; }
-    .testimonial-text { font-size: 0.95rem; color: #444; font-style: italic; }
-    .btn {
-      font-weight: 500;
-      border: 1px solid #0c1e2c;
-      color: #0c1e2c;
-
-      &:hover {
-        background-color: #132e42;
-        color: #fff;
-      }
-    }
-  }
-}
-
-/* --------------------------------- */
 /* Featured Agents Section */
 /* --------------------------------- */
 .agent-card {
@@ -310,4 +267,13 @@
     transform: translateY(-5px);
     box-shadow: 0 12px 25px rgba(0,0,0,0.2);
   }
+}
+/* Tailwind cannot handle :has yet, so small custom CSS */
+.gallery:has(.gallery-panel:hover) .gallery-panel:not(:hover) img {
+  filter: grayscale(100%);
+}
+
+/* flex-grow on hover */
+.gallery-panel:hover {
+  flex: 2.5;
 }

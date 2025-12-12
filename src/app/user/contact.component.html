@@ -1,48 +1,34 @@
-<section class="hero-section contact-page position-relative text-white">
-    <img src="img/home2.webp" class="w-100" style="height: 70vh; object-fit: cover;" alt="Hero Image">
+<!-- Hero Section -->
+<section class="hero-section relative text-white">
+  <img src="img/trac-vu-mhtIv0bE4sg-unsplash.jpg" class="w-100 hero-img" alt="Hero Image">
 
-    <!-- Overlay Text -->
-    <div class="position-absolute top-50 start-50 translate-middle text-center">
-        <h1 class="display-5 fw-bold">Find Your Perfect Residential & Commercial Space</h1>
-        <p class="lead">• Explore Realty •</p>
-    </div>
+  <!-- Black Overlay -->
+  <div class="overlay"></div>
+
+  <!-- Overlay Text -->
+  <div class="contant">
+    <span class="welcome">Contact</span><br>
+  </div>
 </section>
 
-<!-- Card Section - FLOATING OVER IMAGE -->
-<section class="card-section position-relative mb-5" style="margin-top: -60px; z-index: 10;">
-    <div class="container">
-        <div class="row justify-content-center ">
-            <!-- Card 1 -->
-            <div class="col-6 col-md-3">
-                <div class="property-card text-center p-3 rounded">
-                    <i class="bi bi-house-door feature-icon mb-3"></i>
-                    <h6>High Rise Properties</h6>
-                </div>
-            </div>
-            <!-- Card 2 -->
-            <div class="col-6 col-md-3">
-                <div class="property-card text-center p-3 rounded">
-                    <i class="bi bi-buildings feature-icon mb-3"></i>
-                    <h6>Commercial Properties</h6>
-                </div>
-            </div>
-            <!-- Card 3 -->
-            <div class="col-6 col-md-3">
-                <div class="property-card text-center p-3 rounded">
-                    <i class="bi bi-tree feature-icon mb-3"></i>
-                    <h6>Plot & Bungalow</h6>
-                </div>
-            </div>
-            <!-- Card 4 -->
-            <div class="col-6 col-md-3">
-                <div class="property-card text-center p-3 rounded">
-                    <i class="bi bi-building feature-icon mb-3"></i>
-                    <h6>Dealers Floor</h6>
-                </div>
-            </div>
-        </div>
+<!-- Card Section - FLOATING OVER HERO -->
+<section class="card-section ">
+  <div class="container grid grid-cols-2 md:grid-cols-3 gap-6">
+    <div class="property-card text-center p-6 rounded bg-white shadow-lg">
+      <i class="bi bi-house-fill feature-icon mb-3 text-2xl"></i>
+      <h6 class="font-semibold">24/7 Customer Support</h6>
     </div>
+    <div class="property-card text-center p-6 rounded bg-white shadow-lg">
+      <i class="bi bi-building-fill feature-icon mb-3 text-2xl"></i>
+      <h6 class="font-semibold">Visit Our Office</h6>
+    </div>
+    <div class="property-card text-center p-6 rounded bg-white shadow-lg">
+      <i class="bi bi-phone-fill feature-icon mb-3 text-2xl"></i>
+      <h6 class="font-semibold">Quick Response</h6>
+    </div>
+  </div>
 </section>
+
 
 <!-- contact -->
 
@@ -64,7 +50,6 @@
 
                 <!-- Name -->
                 <div class="mb-3 d-flex align-items-center">
-                    <span class="me-3 fs-4 icons"><i class="bi bi-person-fill"></i></span>
                     <input type="text" class="form-control" placeholder="NAME..." formControlName="name">
                 </div>
                 <div *ngIf="submitted && f['name'].errors" class="text-danger mb-2">
@@ -73,7 +58,6 @@
 
                 <!-- Email -->
                 <div class="mb-3 d-flex align-items-center">
-                    <span class="me-3 fs-4 icons"><i class="bi bi-envelope-fill"></i></span>
                     <input type="email" class="form-control" placeholder="EMAIL..." formControlName="email">
                 </div>
                 <div *ngIf="submitted && f['email'].errors" class="text-danger mb-2">
@@ -82,13 +66,11 @@
 
                 <!-- Phone -->
                 <div class="mb-3 d-flex align-items-center">
-                    <span class="me-3 fs-4 icons"><i class="bi bi-telephone-fill"></i></span>
                     <input type="text" class="form-control" placeholder="PHONE..." formControlName="phone">
                 </div>
 
                 <!-- Message -->
                 <div class="mb-3 d-flex align-items-start">
-                    <span class="me-3 fs-4 icons"><i class="bi bi-envelope-fill"></i></span>
                     <textarea class="form-control" rows="5" placeholder="MESSAGE..."
                         formControlName="message"></textarea>
                 </div>

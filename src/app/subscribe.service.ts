@@ -46,6 +46,38 @@ export interface Project {
   createdAt?: string;
 }
 
+export interface Property {
+  _id?: string;
+  name: string;
+  category?: 'residential' | 'commercial';
+  gallery?: GalleryItem[];
+  brochure?: GalleryItem;
+  price1bhk?: string;
+  price2bhk?: string;
+  price3bhk?: string;
+  price4bhk?: string;
+  retailPrice?: string;
+  officePrice?: string;
+  priceFrom?: string;
+  developer?: string;
+  rera?: string;
+  size?: string;
+  status?: 'trending' | 'upcoming' | 'newlyLaunched';
+  description?: string;
+  highlight?: string;
+  location?: {
+    main?: string;
+    location1?: string;
+    location2?: string;
+    location3?: string;
+    location4?: string;
+    location5?: string;
+    mapEmbed?: string;
+  };
+  possession?: string;
+  createdAt?: string;
+}
+
 // -----------------------------
 // Service
 // -----------------------------
@@ -149,4 +181,11 @@ export class SubscribeService {
   deleteProject(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
+
+  // Property apis
+  getProperty():Observable<Project[]>{
+  return this.http
+  .get<{success: boolean; property: Property[] }>(this.apiUrl)
+  .pipe(map(res => res.property));
+}
 }

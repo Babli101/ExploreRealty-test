@@ -1,0 +1,144 @@
+<section class="max-w-4xl mx-auto bg-white p-6 rounded-2xl shadow-md space-y-6">
+
+  <!-- Place Name -->
+  <div>
+    <label class="text-sm font-medium text-gray-700">Place Name</label>
+    <input type="text" placeholder="Enter place name"
+           class="mt-2 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+  </div>
+
+  <!-- Price -->
+  <div>
+    <label class="text-sm font-medium text-gray-700">Price (INR)</label>
+    <input type="number" placeholder="e.g. 7500000"
+           class="mt-2 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+  </div>
+
+  <!-- Residential / Commercial -->
+  <div>
+    <label class="text-sm font-medium text-gray-700">Property Type</label>
+    <div class="flex flex-wrap gap-3 mt-3">
+
+      <label class="flex items-center gap-2 border border-gray-300 px-3 py-2 rounded-md cursor-pointer hover:bg-gray-50">
+        <input type="checkbox" value="Residential" class="h-4 w-4 text-teal-600">
+        <span class="text-sm">Residential</span>
+      </label>
+
+      <label class="flex items-center gap-2 border border-gray-300 px-3 py-2 rounded-md cursor-pointer hover:bg-gray-50">
+        <input type="checkbox" value="Commercial" class="h-4 w-4 text-teal-600">
+        <span class="text-sm">Commercial</span>
+      </label>
+
+    </div>
+  </div>
+
+
+  <!-- NEW — Property Category (Plot, Flat, Shop, House) -->
+  <div>
+    <label class="text-sm font-medium text-gray-700">Property Category</label>
+    <div class="flex flex-wrap gap-3 mt-3">
+
+      <label class="flex items-center gap-2 border border-gray-300 px-3 py-2 rounded-md cursor-pointer hover:bg-gray-50">
+        <input type="checkbox" value="Plot" class="h-4 w-4 text-teal-600">
+        <span class="text-sm">Plot</span>
+      </label>
+
+      <label class="flex items-center gap-2 border border-gray-300 px-3 py-2 rounded-md cursor-pointer hover:bg-gray-50">
+        <input type="checkbox" value="Flat" class="h-4 w-4 text-teal-600">
+        <span class="text-sm">Flat</span>
+      </label>
+
+      <label class="flex items-center gap-2 border border-gray-300 px-3 py-2 rounded-md cursor-pointer hover:bg-gray-50">
+        <input type="checkbox" value="Shop" class="h-4 w-4 text-teal-600">
+        <span class="text-sm">Shop</span>
+      </label>
+
+      <label class="flex items-center gap-2 border border-gray-300 px-3 py-2 rounded-md cursor-pointer hover:bg-gray-50">
+        <input type="checkbox" value="House" class="h-4 w-4 text-teal-600">
+        <span class="text-sm">House</span>
+      </label>
+
+    </div>
+  </div>
+
+
+  <!-- Extra Checkbox Group -->
+  <div>
+    <label class="text-sm font-medium text-gray-700">Additional Options</label>
+    <div class="flex flex-wrap gap-3 mt-3">
+
+      <label class="flex items-center gap-2 border border-gray-300 px-3 py-2 rounded-md cursor-pointer hover:bg-gray-50">
+        <input type="checkbox" value="Furnished" class="h-4 w-4 text-teal-600">
+        <span class="text-sm">Furnished</span>
+      </label>
+
+      <label class="flex items-center gap-2 border border-gray-300 px-3 py-2 rounded-md cursor-pointer hover:bg-gray-50">
+        <input type="checkbox" value="Semi-Furnished" class="h-4 w-4 text-teal-600">
+        <span class="text-sm">Semi-Furnished</span>
+      </label>
+
+      <label class="flex items-center gap-2 border border-gray-300 px-3 py-2 rounded-md cursor-pointer hover:bg-gray-50">
+        <input type="checkbox" value="Unfurnished" class="h-4 w-4 text-teal-600">
+        <span class="text-sm">Unfurnished</span>
+      </label>
+
+    </div>
+  </div>
+
+  <!-- BHK Type -->
+  <div>
+    <label class="text-sm font-medium text-gray-700">BHK Type</label>
+    <div class="flex flex-wrap gap-3 mt-3">
+
+      <label class="flex items-center gap-2 border border-gray-300 px-3 py-2 rounded-md cursor-pointer hover:bg-gray-50">
+        <input type="checkbox" value="1BHK" class="h-4 w-4 text-teal-600">
+        <span class="text-sm">1BHK</span>
+      </label>
+
+      <label class="flex items-center gap-2 border border-gray-300 px-3 py-2 rounded-md cursor-pointer hover:bg-gray-50">
+        <input type="checkbox" value="2BHK" class="h-4 w-4 text-teal-600">
+        <span class="text-sm">2BHK</span>
+      </label>
+
+      <label class="flex items-center gap-2 border border-gray-300 px-3 py-2 rounded-md cursor-pointer hover:bg-gray-50">
+        <input type="checkbox" value="3BHK" class="h-4 w-4 text-teal-600">
+        <span class="text-sm">3BHK</span>
+      </label>
+
+      <label class="flex items-center gap-2 border border-gray-300 px-3 py-2 rounded-md cursor-pointer hover:bg-gray-50">
+        <input type="checkbox" value="Studio" class="h-4 w-4 text-teal-600">
+        <span class="text-sm">Studio</span>
+      </label>
+
+    </div>
+  </div>
+
+  <!-- Floor Input -->
+  <div>
+    <label class="text-sm font-medium text-gray-700">Floor Number</label>
+    <input type="number" placeholder="e.g. 3"
+           class="mt-2 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+  </div>
+
+  <!-- Address -->
+  <div>
+    <label class="text-sm font-medium text-gray-700">Address</label>
+    <input type="text" placeholder="Street, locality, city..."
+           class="mt-2 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+  </div>
+
+  <!-- Multiple Images -->
+  <div>
+    <label class="text-sm font-medium text-gray-700">Upload Images</label>
+    <input type="file" multiple accept="image/*"
+           class="mt-2 w-full text-sm border border-gray-300 rounded-lg file:bg-teal-50 file:text-teal-600 file:px-4 file:py-2 file:rounded-lg cursor-pointer">
+  </div>
+
+  <!-- Description -->
+  <div>
+    <label class="text-sm font-medium text-gray-700">Description</label>
+    <textarea rows="4" placeholder="Write a short description..."
+              class="mt-2 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:outline-none"></textarea>
+  </div>
+
+</section>

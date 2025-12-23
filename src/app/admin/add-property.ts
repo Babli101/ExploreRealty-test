@@ -1,6 +1,14 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormArray,
+  Validators,
+  ReactiveFormsModule,
+  FormControl
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AdminService } from '../admin.service';
 
 @Component({
   selector: 'app-add-property',
@@ -12,62 +20,118 @@ import { CommonModule } from '@angular/common';
 export class AddPropertyComponent {
 
   addPropertyForm: FormGroup;
+  isSubmitting = false;
   selectedImages: File[] = [];
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private adminService: AdminService
+  ) {
     this.addPropertyForm = this.fb.group({
       placeName: ['', Validators.required],
       price: ['', Validators.required],
-      propertyType: this.fb.array([]),        // Residential / Commercial
-      propertyCategory: this.fb.array([]),    // Plot / Flat / Shop / House
-      furnishing: this.fb.array([]),          // Furnished / Semi / Unfurnished
-      bhkType: this.fb.array([]),             // 1BHK / 2BHK / 3BHK / Studio
+      size: ['', Validators.required],
+
+      saleType: this.fb.array([], Validators.required),
+      propertyType: this.fb.array([], Validators.required),
+      propertyCategory: this.fb.array([], Validators.required),
+      furnishing: this.fb.array([]),
+      bhkType: this.fb.array([]),
+      status: this.fb.array([]),
+
       floor: [''],
       address: ['', Validators.required],
-      description: ['', Validators.required]
+      description: ['', Validators.required],
     });
   }
 
-  // Checkbox Handler
-  onCheckboxChange(event: any, formArrayName: string) {
-    const formArray: FormArray = this.addPropertyForm.get(formArrayName) as FormArray;
-
-    if (event.target.checked) {
-      formArray.push(this.fb.control(event.target.value));
-    } else {
-      const index = formArray.controls.findIndex(x => x.value === event.target.value);
-      formArray.removeAt(index);
+  // ================= FILE SELECT =================
+  onFileSelect(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files) {
+      this.selectedImages = Array.from(input.files);
     }
   }
 
-  // Multiple Images
-  onImagesChange(event: any) {
-    this.selectedImages = Array.from(event.target.files);
+  // ================= FORM ARRAY =================
+  getArray(name: string): FormArray {
+    return this.addPropertyForm.get(name) as FormArray;
   }
 
-  // Submit
-  onSubmit() {
+  onCheckboxChange(event: Event, controlName: string) {
+    const checkbox = event.target as HTMLInputElement;
+    const formArray = this.getArray(controlName);
+
+    if (checkbox.checked) {
+      formArray.push(new FormControl(checkbox.value));
+    } else {
+      const index = formArray.controls.findIndex(
+        x => x.value === checkbox.value
+      );
+      if (index !== -1) {
+        formArray.removeAt(index);
+      }
+    }
+  }
+
+  // ================= SUBMIT =================
+  submitForm() {
     if (this.addPropertyForm.invalid) {
-      alert("Please fill all required fields.");
+      this.addPropertyForm.markAllAsTouched();
       return;
     }
 
     const formData = new FormData();
-    const data = this.addPropertyForm.value;
+    const v = this.addPropertyForm.value;
 
-    // Add form values
-    Object.keys(data).forEach(key => {
-      if (Array.isArray(data[key])) {
-        data[key].forEach((val: any) => formData.append(key, val)); // multiple values
-      } else {
-        formData.append(key, data[key]);
+    // 🔥 BASIC FIELDS
+    formData.append('placeName', v.placeName);
+    formData.append('price', String(v.price));
+    formData.append('size', String(v.size));
+    formData.append('address', v.address);
+    formData.append('description', v.description);
+
+    if (v.floor) {
+      formData.append('floor', String(v.floor));
+    }
+
+    // 🔥 ARRAY FIELDS
+    const arrayFields = [
+      'saleType',
+      'propertyType',
+      'propertyCategory',
+      'furnishing',
+      'bhkType',
+      'status'
+    ];
+
+    arrayFields.forEach(field => {
+      if (Array.isArray(v[field])) {
+        v[field].forEach((value: string) => {
+          formData.append(field, value);
+        });
       }
     });
 
-    // Add images
-    this.selectedImages.forEach(file => formData.append('images', file));
+    // 🔥 IMAGE FILES
+    this.selectedImages.forEach(file => {
+      formData.append('gallery', file);
+    });
 
-    console.log("Property Form Data:", data);
-    alert("Property Added Successfully!");
+    this.isSubmitting = true;
+
+    this.adminService.addProperty(formData).subscribe({
+      next: () => {
+        alert('Property added successfully ✅');
+        this.addPropertyForm.reset();
+        this.selectedImages = [];
+        this.isSubmitting = false;
+      },
+      error: (err) => {
+        console.error('ADD PROPERTY ERROR:', err);
+        alert('Failed to add property ❌');
+        this.isSubmitting = false;
+      }
+    });
   }
 }

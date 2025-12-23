@@ -3,6 +3,7 @@ import { Component, AfterViewInit, Inject, PLATFORM_ID, OnInit } from '@angular/
 import { FormsModule, NgForm } from '@angular/forms';
 import { gsap } from 'gsap';
 import { SubscribeService } from '../subscribe.service';
+import { AdminService } from '../admin.service';
 import { RouterModule } from '@angular/router';
 import { environment } from '../../environments/environment';
 
@@ -26,7 +27,8 @@ export class HomeComponent implements AfterViewInit, OnInit {
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
-    private subscribeService: SubscribeService
+    private subscribeService: SubscribeService,
+    private adminService: AdminService
   ) { }
 
   ngOnInit() {
@@ -44,29 +46,38 @@ export class HomeComponent implements AfterViewInit, OnInit {
     });
   }
 
-  fetchLatestProperty(){
-    this.subscribeService.getProperty().subscribe({
-      next:(property)=>{
-        this.latestProperty = property.slice(0, 3);
-        console.log('Latest Property:', this.latestProperty);
+
+  fetchLatestProperty() {
+    this.adminService.getAllProperties().subscribe({
+      next: (properties: any[]) => {
+        this.latestProperty = properties.slice(0, 3);
       },
-      error:(err)=> console.error("Property fetch error:", err)
+      error: (err) => console.error('Property fetch error:', err)
     });
   }
 
-  getImage(project: any, index: number = 0) {
+  getImage(item: any, index: number = 0) {
     const baseUrl = environment.publicBaseUrl.replace(/\/$/, '');
 
-    if (!project?.gallery?.length) return 'assets/noimage.jpg';
+    if (!item?.gallery?.length) return 'assets/noimage.jpg';
 
-    let img = project.gallery[index];
-    let path = img.url;
+    const img = item.gallery[index];
 
-    if (!path) return 'assets/noimage.jpg';
-    if (path.startsWith('http')) return path;
+    // CASE 1: Object { url }
+    if (typeof img === 'object' && img?.url) {
+      if (img.url.startsWith('http')) return img.url;
+      return `${baseUrl}${img.url}`;
+    }
 
-    return `${baseUrl}${path}`;
+    // CASE 2: Direct string "/uploads/xxx.jpg"
+    if (typeof img === 'string') {
+      if (img.startsWith('http')) return img;
+      return `${baseUrl}${img}`;
+    }
+
+    return 'assets/noimage.jpg';
   }
+
 
   allProperties = [
     { city: 'Delhi', type: 'Buy', price: 120000 },

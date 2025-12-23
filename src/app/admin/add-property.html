@@ -1,144 +1,91 @@
-<section class="max-w-4xl mx-auto bg-white p-6 rounded-2xl shadow-md space-y-6">
-
-  <!-- Place Name -->
-  <div>
-    <label class="text-sm font-medium text-gray-700">Place Name</label>
-    <input type="text" placeholder="Enter place name"
-           class="mt-2 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:outline-none">
-  </div>
-
-  <!-- Price -->
-  <div>
-    <label class="text-sm font-medium text-gray-700">Price (INR)</label>
-    <input type="number" placeholder="e.g. 7500000"
-           class="mt-2 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:outline-none">
-  </div>
-
-  <!-- Residential / Commercial -->
-  <div>
-    <label class="text-sm font-medium text-gray-700">Property Type</label>
-    <div class="flex flex-wrap gap-3 mt-3">
-
-      <label class="flex items-center gap-2 border border-gray-300 px-3 py-2 rounded-md cursor-pointer hover:bg-gray-50">
-        <input type="checkbox" value="Residential" class="h-4 w-4 text-teal-600">
-        <span class="text-sm">Residential</span>
-      </label>
-
-      <label class="flex items-center gap-2 border border-gray-300 px-3 py-2 rounded-md cursor-pointer hover:bg-gray-50">
-        <input type="checkbox" value="Commercial" class="h-4 w-4 text-teal-600">
-        <span class="text-sm">Commercial</span>
-      </label>
-
+<section class="max-w-4xl mx-auto bg-white p-6 rounded-2xl shadow-md shadow">
+  <form [formGroup]="addPropertyForm" (ngSubmit)="submitForm()" class="space-y-6">
+    <!-- Place Name -->
+    <div>
+      <label class="text-sm font-medium text-gray-700">Place Name</label>
+      <input type="text" formControlName="placeName" class="mt-2 w-full rounded-lg border px-3 py-2">
     </div>
-  </div>
-
-
-  <!-- NEW — Property Category (Plot, Flat, Shop, House) -->
-  <div>
-    <label class="text-sm font-medium text-gray-700">Property Category</label>
-    <div class="flex flex-wrap gap-3 mt-3">
-
-      <label class="flex items-center gap-2 border border-gray-300 px-3 py-2 rounded-md cursor-pointer hover:bg-gray-50">
-        <input type="checkbox" value="Plot" class="h-4 w-4 text-teal-600">
-        <span class="text-sm">Plot</span>
-      </label>
-
-      <label class="flex items-center gap-2 border border-gray-300 px-3 py-2 rounded-md cursor-pointer hover:bg-gray-50">
-        <input type="checkbox" value="Flat" class="h-4 w-4 text-teal-600">
-        <span class="text-sm">Flat</span>
-      </label>
-
-      <label class="flex items-center gap-2 border border-gray-300 px-3 py-2 rounded-md cursor-pointer hover:bg-gray-50">
-        <input type="checkbox" value="Shop" class="h-4 w-4 text-teal-600">
-        <span class="text-sm">Shop</span>
-      </label>
-
-      <label class="flex items-center gap-2 border border-gray-300 px-3 py-2 rounded-md cursor-pointer hover:bg-gray-50">
-        <input type="checkbox" value="House" class="h-4 w-4 text-teal-600">
-        <span class="text-sm">House</span>
-      </label>
-
+    <!-- Price -->
+    <div>
+      <label class="text-sm font-medium text-gray-700">Price (INR)</label>
+      <input type="number" formControlName="price" class="mt-2 w-full rounded-lg border px-3 py-2">
     </div>
-  </div>
-
-
-  <!-- Extra Checkbox Group -->
-  <div>
-    <label class="text-sm font-medium text-gray-700">Additional Options</label>
-    <div class="flex flex-wrap gap-3 mt-3">
-
-      <label class="flex items-center gap-2 border border-gray-300 px-3 py-2 rounded-md cursor-pointer hover:bg-gray-50">
-        <input type="checkbox" value="Furnished" class="h-4 w-4 text-teal-600">
-        <span class="text-sm">Furnished</span>
-      </label>
-
-      <label class="flex items-center gap-2 border border-gray-300 px-3 py-2 rounded-md cursor-pointer hover:bg-gray-50">
-        <input type="checkbox" value="Semi-Furnished" class="h-4 w-4 text-teal-600">
-        <span class="text-sm">Semi-Furnished</span>
-      </label>
-
-      <label class="flex items-center gap-2 border border-gray-300 px-3 py-2 rounded-md cursor-pointer hover:bg-gray-50">
-        <input type="checkbox" value="Unfurnished" class="h-4 w-4 text-teal-600">
-        <span class="text-sm">Unfurnished</span>
-      </label>
-
+    <!-- Size -->
+    <div>
+      <label class="text-sm font-medium text-gray-700">Size (sq ft)</label>
+      <input type="number" formControlName="size" class="mt-2 w-full rounded-lg border px-3 py-2">
     </div>
-  </div>
-
-  <!-- BHK Type -->
-  <div>
-    <label class="text-sm font-medium text-gray-700">BHK Type</label>
-    <div class="flex flex-wrap gap-3 mt-3">
-
-      <label class="flex items-center gap-2 border border-gray-300 px-3 py-2 rounded-md cursor-pointer hover:bg-gray-50">
-        <input type="checkbox" value="1BHK" class="h-4 w-4 text-teal-600">
-        <span class="text-sm">1BHK</span>
-      </label>
-
-      <label class="flex items-center gap-2 border border-gray-300 px-3 py-2 rounded-md cursor-pointer hover:bg-gray-50">
-        <input type="checkbox" value="2BHK" class="h-4 w-4 text-teal-600">
-        <span class="text-sm">2BHK</span>
-      </label>
-
-      <label class="flex items-center gap-2 border border-gray-300 px-3 py-2 rounded-md cursor-pointer hover:bg-gray-50">
-        <input type="checkbox" value="3BHK" class="h-4 w-4 text-teal-600">
-        <span class="text-sm">3BHK</span>
-      </label>
-
-      <label class="flex items-center gap-2 border border-gray-300 px-3 py-2 rounded-md cursor-pointer hover:bg-gray-50">
-        <input type="checkbox" value="Studio" class="h-4 w-4 text-teal-600">
-        <span class="text-sm">Studio</span>
-      </label>
-
+    <!-- sale Type -->
+    <div>
+      <label class="text-sm font-medium text-gray-700">Sale Type</label>
+      <div class="flex gap-3 mt-3"> <label *ngFor="let type of ['Rent','Buy']">
+          <input type="checkbox" (change)="onCheckboxChange($event, 'saleType')" [value]="type">
+          {{ type }}
+        </label>
+      </div>
     </div>
-  </div>
+    <!-- Property Type -->
+    <div>
+      <label class="text-sm font-medium text-gray-700">Property Type</label>
+      <div class="flex gap-3 mt-3"> <label *ngFor="let type of ['Residential','Commercial']">
+          <input type="checkbox" (change)="onCheckboxChange($event, 'propertyType')" [value]="type">
+          {{ type }}
+        </label>
+      </div>
+    </div>
+    <!-- Property Category -->
+    <div>
+      <label class="text-sm font-medium text-gray-700">Property Category</label>
+      <div class="flex gap-3 mt-3"> <label *ngFor="let cat of ['Plot','Flat','Shop','House']">
+          <input type="checkbox" (change)="onCheckboxChange($event, 'propertyCategory')" [value]="cat">
+          {{ cat }}
+        </label>
+      </div>
+    </div>
+    <!-- Furnishing -->
+    <div>
+      <label class="text-sm font-medium text-gray-700">Furnishing</label>
+      <div class="flex gap-3 mt-3">
+        <label *ngFor="let f of ['Furnished','Semi-Furnished','Unfurnished']">
+          <input type="checkbox" (change)="onCheckboxChange($event, 'furnishing')" [value]="f">
+          {{ f }}
+        </label>
+      </div>
+    </div>
+    <!-- BHK -->
+    <div> <label class="text-sm font-medium text-gray-700">BHK Type</label>
+      <div class="flex gap-3 mt-3">
+        <label *ngFor="let bhk of ['1BHK','2BHK','3BHK','Studio']">
+          <input type="checkbox" (change)="onCheckboxChange($event, 'bhkType')" [value]="bhk">
+          {{ bhk }}
+        </label>
+      </div>
+    </div>
+    <!-- Floor -->
+    <div>
+      <label class="text-sm font-medium text-gray-700">Floor</label>
+      <input type="number" formControlName="floor" class="mt-2 w-full rounded-lg border px-3 py-2">
+    </div>
+    <!-- Address -->
+    <div>
+      <label class="text-sm font-medium text-gray-700">Address</label>
+      <input type="text" formControlName="address" class="mt-2 w-full rounded-lg border px-3 py-2">
+    </div>
+    <!-- Status -->
+    <div> <label class="text-sm font-medium text-gray-700">Status</label>
+      <div class="flex gap-3 mt-3"> <label *ngFor="let s of ['Ready to Move','Under Construction']">
+          <input type="checkbox" (change)="onCheckboxChange($event, 'status')" [value]="s">
+          {{ s }}
+        </label>
+      </div>
+    </div>
+    <input type="file" multiple accept="image/*" (change)="onFileSelect($event)"
+      class="mt-2 w-full text-sm border rounded-lg" />
 
-  <!-- Floor Input -->
-  <div>
-    <label class="text-sm font-medium text-gray-700">Floor Number</label>
-    <input type="number" placeholder="e.g. 3"
-           class="mt-2 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:outline-none">
-  </div>
-
-  <!-- Address -->
-  <div>
-    <label class="text-sm font-medium text-gray-700">Address</label>
-    <input type="text" placeholder="Street, locality, city..."
-           class="mt-2 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:outline-none">
-  </div>
-
-  <!-- Multiple Images -->
-  <div>
-    <label class="text-sm font-medium text-gray-700">Upload Images</label>
-    <input type="file" multiple accept="image/*"
-           class="mt-2 w-full text-sm border border-gray-300 rounded-lg file:bg-teal-50 file:text-teal-600 file:px-4 file:py-2 file:rounded-lg cursor-pointer">
-  </div>
-
-  <!-- Description -->
-  <div>
-    <label class="text-sm font-medium text-gray-700">Description</label>
-    <textarea rows="4" placeholder="Write a short description..."
-              class="mt-2 w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:outline-none"></textarea>
-  </div>
-
+    <!-- Description -->
+    <div> <label class="text-sm font-medium text-gray-700">Description</label>
+      <textarea rows="4" formControlName="description" class="mt-2 w-full rounded-lg border px-3 py-2"></textarea>
+    </div>
+    <button class="bg-blue-900 text-white px-6 py-2 rounded-lg"> Add Property </button>
+  </form>
 </section>

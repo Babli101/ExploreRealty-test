@@ -15,6 +15,7 @@ import { SingleComponent } from './admin/single';
 import { GetProject } from './admin/get-project';
 import { LoginComponent } from './user/login';
 import { AddPropertyComponent } from './admin/add-property';
+import { GetProperty } from './admin/get-property';
 
 const routes: Routes = [
   {
@@ -36,7 +37,8 @@ const routes: Routes = [
     { path: 'user-contactlist', component: UserContactListComponent },
     { path: 'add-project', component: AddProjectComponent },
     { path: 'get-project', component: GetProject },
-    { path: 'get-property', component: AddPropertyComponent },
+    { path: 'add-property', component: AddPropertyComponent },
+    { path: 'get-property', component: GetProperty },
     { path: 'project/:id', component: SingleComponent },
     // { path: 'property/:id', component: AddPropertyComponent },
     { path: '**', redirectTo: '/' }

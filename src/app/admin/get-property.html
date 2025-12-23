@@ -1,0 +1,32 @@
+<div *ngIf="loading" class="loading">Loading property...</div>
+
+<div *ngIf="!(properties$ | async)?.length && !loading" class="no-properties">
+  No properties found.
+</div>
+
+<div class="properties-container">
+  <div class="property-card" *ngFor="let property of properties$ | async">
+    
+    <div class="property-image">
+      <img [src]="getImage(property)" alt="property image">
+    </div>
+
+    <div class="property-details">
+      <h3>{{ property.placeName }}</h3>
+      <p class="property-price">₹ {{ getPrice(property) }}</p>
+
+      <div class="property-actions">
+        <a class="btn view-btn"
+           [routerLink]="['/admin/property', property._id]">
+          Explore
+        </a>
+
+        <button class="btn delete-btn"
+                (click)="deleteProject(property)">
+          Delete
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

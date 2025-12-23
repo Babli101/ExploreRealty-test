@@ -277,3 +277,81 @@ a{
 .gallery-panel:hover {
   flex: 2.5;
 }
+
+
+// marquee scss 
+
+.property-marquee {
+  position: relative;
+  overflow: hidden;
+  padding: 1.5rem 0;
+
+  &--gradient {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, #fff 5%, transparent 8%),
+      linear-gradient(270deg, #fff 5%, transparent 7%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  &--track {
+    display: flex;
+    width: max-content;
+  }
+
+  &--group {
+    display: flex;
+    gap: 24px;
+    animation: scroll-left 35s linear infinite;
+  }
+}
+
+.property-card {
+  width: 280px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  flex-shrink: 0;
+
+  img {
+    height: 160px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  h4 {
+    margin: 10px 0 4px;
+    font-size: 18px;
+  }
+
+  p {
+    font-weight: 600;
+    color: #2c3e50;
+  }
+}
+
+/* Animation */
+@keyframes scroll-left {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .property-marquee {
+    &--group {
+      animation: none;
+    }
+  }
+}

@@ -44,7 +44,7 @@ export class AdminService {
   private baseUrl = environment.apiBaseUrl;
   private apiUrl = `${this.baseUrl}/properties`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // ✅ GET ALL
   getAllProperties(): Observable<Property[]> {
@@ -61,11 +61,14 @@ export class AdminService {
   }
 
   // 🔥 ADD PROPERTY (FormData – images supported)
+  // 🔥 ADD PROPERTY (FormData – images supported)
   addProperty(data: FormData): Observable<Property> {
     return this.http
       .post<{ success: boolean; data: Property }>(this.apiUrl, data)
       .pipe(map(res => res.data));
   }
+
+
 
   // 🔥 UPDATE PROPERTY (JSON OR FormData – BOTH SUPPORTED)
   updateProperty(

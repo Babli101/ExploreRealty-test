@@ -16,6 +16,7 @@ import { GetProject } from './admin/get-project';
 import { LoginComponent } from './user/login';
 import { AddPropertyComponent } from './admin/add-property';
 import { GetProperty } from './admin/get-property';
+import { SinglePropertyComponent} from './user/single-property';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
     { path: 'page', component: PageComponent },
     { path: 'project', component: ProjectComponent },
     { path: 'single-project/:id', component: SingleProjectComponent },
+    { path: 'single-property/:id', component: SinglePropertyComponent },
     { path: 'login', component: LoginComponent }
   ]
 },

@@ -28,20 +28,28 @@ export class AddPropertyComponent {
     private adminService: AdminService
   ) {
     this.addPropertyForm = this.fb.group({
+
+      /* ---------- BASIC DETAILS ---------- */
       placeName: ['', Validators.required],
       price: ['', Validators.required],
+      bprice: [''],
       size: ['', Validators.required],
 
-      saleType: this.fb.array([], Validators.required),
-      propertyType: this.fb.array([], Validators.required),
-      propertyCategory: this.fb.array([], Validators.required),
-      furnishing: this.fb.array([]),
-      bhkType: this.fb.array([]),
-      status: this.fb.array([]),
-
+      owner: [''],
+      phone: ['', Validators.pattern(/^[6-9]\d{9}$/)],
+      age: [''],
       floor: [''],
       address: ['', Validators.required],
       description: ['', Validators.required],
+
+      /* ---------- CHECKBOX ARRAYS ---------- */
+      saleType: this.fb.array([]),
+      transactionType: this.fb.array([]),
+      propertyType: this.fb.array([]),
+      propertyCategory: this.fb.array([]),
+      furnishing: this.fb.array([]),
+      bhkType: this.fb.array([]),
+      status: this.fb.array([])
     });
   }
 
@@ -53,7 +61,7 @@ export class AddPropertyComponent {
     }
   }
 
-  // ================= FORM ARRAY =================
+  // ================= FORM ARRAY HELPER =================
   getArray(name: string): FormArray {
     return this.addPropertyForm.get(name) as FormArray;
   }
@@ -63,10 +71,12 @@ export class AddPropertyComponent {
     const formArray = this.getArray(controlName);
 
     if (checkbox.checked) {
-      formArray.push(new FormControl(checkbox.value));
+      if (!formArray.value.includes(checkbox.value)) {
+        formArray.push(new FormControl(checkbox.value));
+      }
     } else {
       const index = formArray.controls.findIndex(
-        x => x.value === checkbox.value
+        c => c.value === checkbox.value
       );
       if (index !== -1) {
         formArray.removeAt(index);
@@ -76,28 +86,42 @@ export class AddPropertyComponent {
 
   // ================= SUBMIT =================
   submitForm() {
+
+      console.log('FORM VALUE 👉', this.addPropertyForm.value);
+    if (
+      this.getArray('saleType').length === 0 ||
+      this.getArray('propertyType').length === 0 ||
+      this.getArray('propertyCategory').length === 0
+    ) {
+      alert('Please select Sale Type, Property Type and Property Category');
+      return;
+    }
+
     if (this.addPropertyForm.invalid) {
       this.addPropertyForm.markAllAsTouched();
       return;
     }
 
-    const formData = new FormData();
     const v = this.addPropertyForm.value;
+    const formData = new FormData();
 
-    // 🔥 BASIC FIELDS
+    /* ---------- BASIC FIELDS ---------- */
     formData.append('placeName', v.placeName);
     formData.append('price', String(v.price));
     formData.append('size', String(v.size));
     formData.append('address', v.address);
     formData.append('description', v.description);
 
-    if (v.floor) {
-      formData.append('floor', String(v.floor));
-    }
+    if (v.bprice) formData.append('bprice', String(v.bprice));
+    if (v.owner) formData.append('owner', v.owner);
+    if (v.phone) formData.append('phone', v.phone);
+    if (v.age) formData.append('age', v.age);
+    if (v.floor) formData.append('floor', String(v.floor));
 
-    // 🔥 ARRAY FIELDS
+    /* ---------- ARRAY FIELDS ---------- */
     const arrayFields = [
       'saleType',
+      'transactionType',
       'propertyType',
       'propertyCategory',
       'furnishing',
@@ -106,17 +130,17 @@ export class AddPropertyComponent {
     ];
 
     arrayFields.forEach(field => {
-      if (Array.isArray(v[field])) {
-        v[field].forEach((value: string) => {
-          formData.append(field, value);
-        });
-      }
+      v[field]?.forEach((value: string) => {
+        formData.append(field, value);
+      });
     });
 
-    // 🔥 IMAGE FILES
-    this.selectedImages.forEach(file => {
-      formData.append('gallery', file);
-    });
+    /* ---------- IMAGE FILES (SAFE) ---------- */
+    if (this.selectedImages.length > 0) {
+      this.selectedImages.forEach(file => {
+        formData.append('gallery', file);
+      });
+    }
 
     this.isSubmitting = true;
 

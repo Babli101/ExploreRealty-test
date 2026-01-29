@@ -1,45 +1,150 @@
-<div #mainContainer class="container">
+<div class="min-h-screen pt-20 flex items-center justify-center bg-gray-100 px-4">
 
-  <!-- Sign Up -->
-  <div class="form-container sign-up-container">
-    <form (ngSubmit)="onSignupSubmit()">
-      <h1>Create Account</h1>
+  <div
+    class="relative w-full max-w-4xl bg-white rounded-xl shadow-2xl overflow-hidden"
+  >
 
-      <input type="text" placeholder="Name" [(ngModel)]="signupData.name" name="name" required />
-      <input type="email" placeholder="Email" [(ngModel)]="signupData.email" name="email" required />
-      <input type="password" placeholder="Password" [(ngModel)]="signupData.password" name="password" required />
+    <!-- FORMS WRAPPER -->
+    <div
+      class="flex flex-col md:flex-row md:h-[460px] transition-all duration-700"
+    >
 
-      <button type="submit">Sign Up</button>
-    </form>
-  </div>
-  <!-- Sign In -->
-  <div class="form-container sign-in-container">
-    <form (ngSubmit)="onLoginSubmit()">
-      <h1>Sign In</h1>
+      <!-- SIGN IN -->
+      <div
+        class="w-full md:w-1/2 flex items-center justify-center
+               transition-all duration-700"
+        [class.md:translate-x-full]="isSignUp"
+        [class.md:opacity-0]="isSignUp"
+        [class.hidden]="isSignUp && isMobile"
+      >
+        <form
+          class="w-full px-6 md:px-10 py-10 text-center"
+          (ngSubmit)="onLoginSubmit()"
+        >
+          <h1 class="text-2xl font-bold mb-6">Sign In</h1>
 
-      <input type="email" placeholder="Email" [(ngModel)]="loginData.email" name="loginEmail" required />
-      <input type="password" placeholder="Password" [(ngModel)]="loginData.password" name="loginPass" required />
+          <input
+            type="email"
+            placeholder="Email"
+            [(ngModel)]="loginData.email"
+            name="loginEmail"
+            class="w-full mb-3 px-4 py-2 rounded bg-gray-100 focus:ring-2 focus:ring-[#10253f]"
+          />
 
-      <button type="submit">Sign In</button>
-    </form>
-  </div>
+          <input
+            type="password"
+            placeholder="Password"
+            [(ngModel)]="loginData.password"
+            name="loginPass"
+            class="w-full mb-4 px-4 py-2 rounded bg-gray-100 focus:ring-2 focus:ring-[#10253f]"
+          />
 
-  <!-- Overlay -->
-  <div class="overlay-container">
-    <div class="overlay">
+          <button
+            type="submit"
+            class="bg-[#10253f] text-white w-full py-2 mb-2 rounded-full uppercase text-sm hover:scale-95 transition"
+          >
+            Sign In
+          </button>
 
-      <div class="overlay-panel overlay-left">
-        <h1>Welcome Back!</h1>
-        <p>To keep connected with us please login</p>
-        <button class="ghost" (click)="onSignIn()">Sign In</button>
+          <!-- Mobile Toggle -->
+          <p class="text-sm md:hidden">
+            Don’t have an account?
+            <button
+              type="button"
+              class="text-[#10253f] font-semibold ml-1"
+              (click)="onSignUp()"
+            >
+              Sign Up
+            </button>
+          </p>
+        </form>
       </div>
 
-      <div class="overlay-panel overlay-right">
-        <h1>Hello, Friend!</h1>
-        <p>Enter your personal details and start your journey</p>
-        <button class="ghost" (click)="onSignUp()">Sign Up</button>
-      </div>
+      <!-- SIGN UP -->
+      <div
+        class="w-full md:w-1/2 flex items-center justify-center
+               transition-all duration-700 md:absolute md:right-0 md:h-full"
+        [class.opacity-100]="isSignUp"
+        [class.opacity-0]="!isSignUp"
+        [class.hidden]="!isSignUp && isMobile"
+      >
+        <form
+          class="w-full px-6 md:px-10 py-10 text-center"
+          (ngSubmit)="onSignupSubmit()"
+        >
+          <h1 class="text-2xl font-bold mb-6">Create Account</h1>
 
+          <input
+            type="text"
+            placeholder="Name"
+            [(ngModel)]="signupData.name"
+            name="name"
+            class="w-full mb-3 px-4 py-2 rounded bg-gray-100 focus:ring-2 focus:ring-[#10253f]"
+          />
+
+          <input
+            type="email"
+            placeholder="Email"
+            [(ngModel)]="signupData.email"
+            name="email"
+            class="w-full mb-3 px-4 py-2 rounded bg-gray-100 focus:ring-2 focus:ring-[#10253f]"
+          />
+
+          <input
+            type="password"
+            placeholder="Password"
+            [(ngModel)]="signupData.password"
+            name="password"
+            class="w-full mb-4 px-4 py-2 rounded bg-gray-100 focus:ring-2 focus:ring-[#10253f]"
+          />
+
+          <button
+            type="submit"
+            class="bg-[#10253f] text-white w-full py-2 rounded-full mb-2 uppercase text-sm hover:scale-95 transition"
+          >
+            Sign Up
+          </button>
+
+          <!-- Mobile Toggle -->
+          <p class="text-sm md:hidden">
+            Already have an account?
+            <button
+              type="button"
+              class="text-[#10253f] font-semibold ml-1"
+              (click)="onSignIn()"
+            >
+              Sign In
+            </button>
+          </p>
+        </form>
+      </div>
     </div>
+
+    <!-- OVERLAY (DESKTOP ONLY) -->
+    <div
+      class="hidden md:flex absolute top-0 right-0 w-1/2 h-full text-white
+             bg-gradient-to-br from-[#101e30] to-[#3d618a]
+             flex-col items-center justify-center text-center
+             transition-all duration-700"
+      [class.-translate-x-full]="isSignUp"
+    >
+      <h2 class="text-2xl font-bold mb-3">
+        {{ isSignUp ? 'Welcome Back!' : 'Hello, Friend!' }}
+      </h2>
+
+      <p class="text-sm mb-6 px-6">
+        {{ isSignUp
+          ? 'To keep connected with us please login'
+          : 'Enter your personal details and start your journey' }}
+      </p>
+
+      <button
+        class="border border-white px-8 py-2 rounded-full text-sm uppercase hover:bg-white/10 transition"
+        (click)="isSignUp ? onSignIn() : onSignUp()"
+      >
+        {{ isSignUp ? 'Sign In' : 'Sign Up' }}
+      </button>
+    </div>
+
   </div>
 </div>

@@ -1,103 +1,178 @@
 <!-- Hero Section -->
-<section class="hero-section relative text-white">
-  <img src="img/trac-vu-mhtIv0bE4sg-unsplash.jpg" class="w-100 hero-img" alt="Hero Image">
+<section class="relative md:h-[70vh] h-[50vh] w-full overflow-hidden text-white">
 
-  <!-- Black Overlay -->
-  <div class="overlay"></div>
+    <!-- Background Image -->
+    <img src="img/trac-vu-mhtIv0bE4sg-unsplash.jpg" alt="Hero Image"
+        class="absolute inset-0 w-full h-full object-cover" />
 
-  <!-- Overlay Text -->
-  <div class="contant">
-    <span class="welcome">Contact</span><br>
-  </div>
-</section>
+    <!-- Black Overlay -->
+    <div class="absolute inset-0 bg-black/40"></div>
 
-<!-- Card Section - FLOATING OVER HERO -->
-<section class="card-section ">
-  <div class="container grid grid-cols-2 md:grid-cols-3 gap-6">
-    <div class="property-card text-center p-6 rounded bg-white shadow-lg">
-      <i class="bi bi-house-fill feature-icon mb-3 text-2xl"></i>
-      <h6 class="font-semibold">24/7 Customer Support</h6>
+    <!-- Center Content -->
+    <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+        <span class="uppercase font-bold tracking-[8px] text-3xl mt-18 md:text-4xl animate-pulse">
+            Contact Us
+        </span>
     </div>
-    <div class="property-card text-center p-6 rounded bg-white shadow-lg">
-      <i class="bi bi-building-fill feature-icon mb-3 text-2xl"></i>
-      <h6 class="font-semibold">Visit Our Office</h6>
-    </div>
-    <div class="property-card text-center p-6 rounded bg-white shadow-lg">
-      <i class="bi bi-phone-fill feature-icon mb-3 text-2xl"></i>
-      <h6 class="font-semibold">Quick Response</h6>
-    </div>
-  </div>
 </section>
 
 
+<!-- Floating Cards -->
+<section class="relative z-10 -mt-16 px-4 z-10 hidden md:block">
+    <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-6">
+
+        <!-- Card -->
+        <div class="bg-white rounded-xl p-6 text-center shadow-lg transition hover:-translate-y-2 hover:shadow-2xl">
+            <i class="bi bi-house-door text-4xl text-[#0c1e2c] mb-3 block"></i>
+            <h6 class="font-semibold">24/7 Customer Support</h6>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 text-center shadow-lg transition hover:-translate-y-2 hover:shadow-2xl">
+            <i class="bi bi-buildings text-4xl text-[#0c1e2c] mb-3 block"></i>
+            <h6 class="font-semibold">Visit Our Office</h6>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 text-center shadow-lg transition hover:-translate-y-2 hover:shadow-2xl">
+            <i class="bi bi-tree text-4xl text-[#0c1e2c] mb-3 block"></i>
+            <h6 class="font-semibold">Quick Response</h6>
+        </div>
+
+    </div>
+</section>
 <!-- contact -->
+<section class="py-16 mt-12">
+  <div class="max-w-5xl mx-auto px-4">
 
-<div class="container-fluid contact py-5 mt-5">
-    <h1 class="mb-5 text-center">Contact Us</h1>
-    <div class="row m-4 g-4">
-
-        <!-- Map Column -->
-        <div class="col-md-6">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7004.117627486164!2d77.36474486586917!3d28.627999348201786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1756360753512!5m2!1sen!2sin"
-                width="100%" height="450" style="border:0; border-radius: 5px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);" allowfullscreen="" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-
-        <!-- Form Column -->
-        <div class="col-md-6 mt-5">
-            <form [formGroup]="contactForm" (ngSubmit)="submitContactForm()" class="contact-form">
-
-                <!-- Name -->
-                <div class="mb-3 d-flex align-items-center">
-                    <input type="text" class="form-control" placeholder="NAME..." formControlName="name">
-                </div>
-                <div *ngIf="submitted && f['name'].errors" class="text-danger mb-2">
-                    Name is required.
-                </div>
-
-                <!-- Email -->
-                <div class="mb-3 d-flex align-items-center">
-                    <input type="email" class="form-control" placeholder="EMAIL..." formControlName="email">
-                </div>
-                <div *ngIf="submitted && f['email'].errors" class="text-danger mb-2">
-                    Valid email is required.
-                </div>
-
-                <!-- Phone -->
-                <div class="mb-3 d-flex align-items-center">
-                    <input type="text" class="form-control" placeholder="PHONE..." formControlName="phone">
-                </div>
-
-                <!-- Message -->
-                <div class="mb-3 d-flex align-items-start">
-                    <textarea class="form-control" rows="5" placeholder="MESSAGE..."
-                        formControlName="message"></textarea>
-                </div>
-                <div *ngIf="submitted && f['message'].errors" class="text-danger mb-2">
-                    Message is required.
-                </div>
-
-                <div class="text-end">
-                    <button type="submit" class="btn" >SEND MESSAGE</button>
-                </div>
-
-            </form>
-        </div>
+    <!-- Heading -->
+    <div class="text-center mb-14">
+      <h1 class="text-3xl md:text-4xl font-bold text-[#10253f]">
+        Contact Us
+      </h1>
+      <p class="text-gray-600 mt-2">
+        We’d love to hear from you. Reach out anytime.
+      </p>
     </div>
 
-    <!-- Footer Info -->
-    <div class="row m-4">
-        <div class="col-md-6 footer-info">
-            <h6>ADDRESS</h6>
-            <p>Company Name INC.</p>
-            <p>C-721, KLJ Noida One</p>
-            <p>Noida Sector 62, UP</p>
+    <!-- FORM + OFFICE DETAILS -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
+
+      <!-- CONTACT FORM -->
+      <div class="lg:col-span-2">
+        <form
+          [formGroup]="contactForm"
+          (ngSubmit)="submitContactForm()"
+          class="bg-white"
+        >
+
+          <h3 class="text-xl font-semibold text-[#10253f] mb-6">
+            Send us a message
+          </h3>
+
+          <!-- Inputs -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-4">
+            <div>
+              <input
+                type="text"
+                placeholder="Full Name"
+                formControlName="name"
+                class="w-full px-4 py-3 rounded-lg border border-gray-300
+                       focus:ring-2 focus:ring-[#10253f] focus:outline-none"
+              />
+              <p *ngIf="submitted && f['name'].errors" class="text-red-500 text-sm mt-1">
+                Name is required
+              </p>
+            </div>
+
+            <div>
+              <input
+                type="email"
+                placeholder="Email Address"
+                formControlName="email"
+                class="w-full px-4 py-3 rounded-lg border border-gray-300
+                       focus:ring-2 focus:ring-[#10253f] focus:outline-none"
+              />
+              <p *ngIf="submitted && f['email'].errors" class="text-red-500 text-sm mt-1">
+                Valid email required
+              </p>
+            </div>
+          </div>
+
+          <input
+            type="text"
+            placeholder="Phone Number"
+            formControlName="phone"
+            class="w-full mb-5 px-4 py-3 rounded-lg border border-gray-300
+                   focus:ring-2 focus:ring-[#10253f] focus:outline-none"
+          />
+
+          <textarea
+            rows="5"
+            placeholder="Your Message"
+            formControlName="message"
+            class="w-full mb-4 px-4 py-3 rounded-lg border border-gray-300
+                   focus:ring-2 focus:ring-[#10253f] focus:outline-none"
+          ></textarea>
+
+          <p *ngIf="submitted && f['message'].errors" class="text-red-500 text-sm mb-4">
+            Message is required
+          </p>
+
+          <!-- Button -->
+          <button
+            type="submit"
+            class="bg-[#10253f] text-white px-8 py-3 rounded-lg
+                   font-semibold tracking-wide hover:bg-[#16355a]
+                   transition"
+          >
+            Send Message
+          </button>
+
+        </form>
+      </div>
+
+      <!-- OFFICE DETAILS -->
+      <div class="p-8">
+        <h3 class="text-xl font-semibold text-[#10253f] mb-6">
+          Office Information
+        </h3>
+        <div class="mb-6">
+          <p class="text-sm font-semibold text-gray-500 uppercase mb-2">
+            Address
+          </p>
+          <p class="text-gray-700 leading-relaxed">
+            Company Name INC.<br />
+            C-721, KLJ Noida One<br />
+            Sector 62, Noida, UP
+          </p>
         </div>
-        <div class="col-md-6 footer-info">
-            <h6>CONTACT</h6>
-            <p>(+91) 93013 24098</p>
-            <p>office@companyname.com</p>
+        <div class="space-y-4">
+          <div class="flex items-center gap-3 text-gray-700">
+            <span class="text-[#f0bc4c] text-xl">📞</span>
+            <a href="tel:+919301324098" class="hover:text-[#10253f]">
+              (+91) 93013 24098
+            </a>
+          </div>
+          <div class="flex items-center gap-3 text-gray-700">
+            <span class="text-[#f0bc4c] text-xl">✉</span>
+            <a href="mailto:office@companyname.com" class="hover:text-[#10253f] break-all">
+              office@companyname.com
+            </a>
+          </div>
         </div>
+        <div class="mt-8 h-px bg-gray-200"></div>
+        <p class="text-sm text-gray-500 mt-6">
+          Our team will get back to you within 24 hours.
+        </p>
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- MAP (FULL WIDTH ON TOP) -->
+<div class="mb-12">
+    <iframe
+        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7004.117627486164!2d77.36474486586917!3d28.627999348201786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1756360753512!5m2!1sen!2sin"
+        class="w-full h-[450px] rounded-lg shadow-lg border-0" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
 </div>

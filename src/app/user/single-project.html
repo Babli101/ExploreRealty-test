@@ -1,140 +1,170 @@
-<div class="container-single" *ngIf="project">
-  <div class="container">
-    <div class="row">
-      <div class="col-8 image-container-col">
-        <!-- ✅ First image -->
-        <img [src]="getImageUrl(project?.gallery?.[5])" class="img-fluid rounded project-main-image"
-          [alt]="project?.name">
-      </div>
-      <div class="col-4">
-        <div class="details">
-          <h4 class="p-3">Details</h4>
-          <ul>
-            <li>
-              <p><strong>Project Name:</strong> {{ project?.name }}</p>
-            </li>
-            <li>
-              <p><strong>Developer:</strong> {{ project?.developer || 'N/A' }}</p>
-            </li>
-            <li>
-              <p><strong>Developer:</strong> {{ project?.rera || 'N/A' }}</p>
-            </li>
-            <li>
-              <p><strong>Category:</strong> {{ project?.category | titlecase }}</p>
-            </li>
-            <li>
-              <p><strong>Size:</strong> {{ project?.size || 'N/A' }}</p>
-            </li>
-            <li>
-              <p><strong>Possession:</strong> {{ project?.possession || 'N/A' }}</p>
-            </li>
-          </ul>
-        </div>
-      </div>
+<section class="max-w-7xl mx-auto px-4 mt-32" *ngIf="project">
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+    <!-- Main Image -->
+    <div class="lg:col-span-2 h-[320px] overflow-hidden rounded-xl shadow-lg">
+      <img
+        [src]="getImageUrl(project?.gallery?.[0])"
+        [alt]="project?.name"
+        class="w-full h-full object-cover"
+      />
     </div>
+
+    <!-- Details Card -->
+    <div class="bg-white rounded-xl shadow-lg p-6">
+      <h3 class="text-xl font-semibold mb-4 border-b pb-2">Project Details</h3>
+
+      <ul class="space-y-3 text-sm text-gray-700">
+        <li><strong>Name:</strong> {{ project?.name }}</li>
+        <li><strong>Developer:</strong> {{ project?.developer || 'N/A' }}</li>
+        <li><strong>RERA:</strong> {{ project?.rera || 'N/A' }}</li>
+        <li><strong>Category:</strong> {{ project?.category | titlecase }}</li>
+        <li><strong>Size:</strong> {{ project?.size || 'N/A' }}</li>
+        <li><strong>Possession:</strong> {{ project?.possession || 'N/A' }}</li>
+      </ul>
+    </div>
+
   </div>
-</div>
+</section>
 
 <!-- ✅ Description section -->
-<div class="container">
-  <div class="row mt-5 align-items-center description-row">
-    <div class="col-md-6 description">
-      <h1>{{ project?.name }}</h1>
-      <p>{{ project?.description }}</p>
+<section class="max-w-7xl mx-auto px-4 mt-16">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+
+    <div>
+      <h1 class="text-3xl font-bold text-[#10253f] mb-4">
+        {{ project?.name }}
+      </h1>
+      <p class="text-gray-700 leading-relaxed">
+        {{ project?.description }}
+      </p>
     </div>
-    <div class="col-md-6 description-img text-center">
-      <img [src]="getImageUrl(project?.gallery?.[4] || project?.gallery?.[0])" [alt]="project?.name"
-        class="img-fluid rounded">
+
+    <div class="overflow-hidden rounded-xl shadow-lg">
+      <img
+        [src]="getImageUrl(project?.gallery?.[1] || project?.gallery?.[0])"
+        class="w-full h-[300px] object-cover"
+      />
     </div>
+
   </div>
-</div>
+</section>
+
 
 <!-- ✅ Hero section -->
-<div class="image-container mt-5">
-  <img [src]="getImageUrl(project?.gallery?.[4])" [alt]="project?.name">
-  <div class="overlay"></div>
-  <div class="text-overlay">
-    <h1>{{ project?.name }}</h1>
-    <p>{{ project?.location?.main }}</p>
+<section class="relative mt-20 h-[400px]">
+  <img
+    [src]="getImageUrl(project?.gallery?.[2])"
+    class="w-full h-full object-cover"
+  />
 
-    <!-- ✅ Brochure download -->
-    <!-- <button type="button" class="btn text-white" (click)="downloadBrochure(project?.brochure)"
-      [disabled]="!project?.brochure">
-      Download Brochure
-    </button> -->
-    <a [href]="environment.publicBaseUrl + project.brochure.url" download="{{ project.brochure.filename }}"
-      class="btn text-white">
+  <div class="absolute inset-0 bg-black/50"></div>
+
+  <div class="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4">
+    <h1 class="text-3xl md:text-4xl font-bold mb-2">
+      {{ project?.name }}
+    </h1>
+    <p class="mb-6 text-lg">
+      {{ project?.location?.main }}
+    </p>
+
+    <a
+      *ngIf="project?.brochure"
+      [href]="environment.publicBaseUrl + project.brochure.url"
+      download
+      class="bg-[#10253f] px-6 py-3 rounded-md font-semibold hover:bg-[#16355a] transition"
+    >
       Download Brochure
     </a>
-
   </div>
-</div>
+</section>
+
 
 <!-- Facilities & gallery carousel -->
-<div class="container my-5" *ngIf="project">
-  <div class="row align-items-center">
-    <!-- Left Column: Facilities -->
-    <div class="col-12 col-md-6 mb-4">
-      <div class="feature-list">
-        <h1>Facilities</h1>
-        <div class="highlight" *ngIf="project?.highlight">
-          {{ project?.highlight }}
-        </div>
-      </div>
+<section class="max-w-7xl mx-auto px-4 my-20">
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+
+    <!-- Facilities -->
+    <div>
+      <h2 class="text-2xl font-bold mb-4">Facilities</h2>
+      <p class="text-gray-700 bg-gray-100 p-4 rounded-lg">
+        {{ project?.highlight }}
+      </p>
     </div>
 
-    <!-- Right Column: Carousel -->
-    <div class="col-12 col-md-6">
-      <div id="thumbCarousel" class="carousel slide custom-carousel" data-bs-ride="carousel">
-
-        <!-- Carousel Slides -->
-        <div class="carousel-inner">
-          <div *ngFor="let img of project?.gallery || []; let i = index" class="carousel-item" [class.active]="i === 0">
-            <img [src]="getImageUrl(img)" [alt]="project?.name" class="d-block mx-auto"
-              style="width: 100%; max-height: 400px; object-fit: cover;">
-          </div>
-        </div>
-
-        <!-- Carousel Controls -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#thumbCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#thumbCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
+    <!-- Gallery -->
+    <div class="grid grid-cols-2 gap-4">
+      <img
+        *ngFor="let img of project?.gallery | slice:0:4"
+        [src]="getImageUrl(img)"
+        class="rounded-lg h-40 w-full object-cover hover:scale-105 transition"
+      />
     </div>
-
 
   </div>
-</div>
+</section>
+
 
 <!-- ✅ GSAP Animated Lines -->
-<div class="content-changer mb-5">
-  <div class="line text-center">Discover Inspiring Spaces</div>
-  <div class="line text-center">Residential Comfort,</div>
-  <div class="line text-center">Commercial Success with</div>
-  <div class="line text-center">Explore Realty.</div>
-  <div class="line text-center">
-    <img src="logo-1.png" alt="">
+<div class="relative flex items-center justify-center h-[40vh] bg-[#0e1c29] mb-5 font-[Montserrat]">
+  <!-- Line 1 -->
+  <div class="line absolute w-full text-center
+           text-[28px] md:text-[40px]
+           tracking-[10px] text-[#f0bc4c] opacity-0">
+    Discover Inspiring Spaces
+  </div>
+
+  <!-- Line 2 -->
+  <div class="line absolute w-full text-center
+           text-[28px] md:text-[40px]
+           tracking-[10px] text-[#f0bc4c] opacity-0">
+    Residential Comfort,
+  </div>
+
+  <!-- Line 3 -->
+  <div class="line absolute w-full text-center
+           text-[28px] md:text-[40px]
+           tracking-[10px] text-[#f0bc4c] opacity-0">
+    Commercial Success with
+  </div>
+
+  <!-- Line 4 -->
+  <div class="line absolute w-full text-center
+           text-[28px] md:text-[40px]
+           tracking-[10px] text-[#f0bc4c] opacity-0">
+    Explore Realty.
+  </div>
+
+  <!-- Logo -->
+  <div class="line absolute w-full text-center opacity-0">
+    <img src="logo-1.png" alt="Explore Realty" class="mx-auto h-20 md:h-24" />
   </div>
 </div>
 
 <!-- ✅ Map Section -->
-<div class="container location-connectivity">
-  <div>
-    <h2>Location</h2>
-    <p *ngFor="let point of connectivityPoints">
-      <em>{{ point }}</em>
+<section class="max-w-6xl mx-auto px-4 my-20">
+
+  <!-- Connectivity -->
+  <div class="bg-[#e1eefa] p-8 rounded-xl shadow-md text-center mb-10">
+    <h2 class="text-2xl font-bold mb-4">Location Connectivity</h2>
+    <p
+      *ngFor="let point of connectivityPoints"
+      class="text-gray-700 mb-2"
+    >
+      {{ point }}
     </p>
   </div>
-</div>
-<div id="location" *ngIf="project?.location">
-  <div class="location-section">
-    <div class="map-frame">
-      <iframe [src]="getSafeMap(project?.location?.mapEmbed)" allowfullscreen loading="lazy"></iframe>
-    </div>
+
+  <!-- Map -->
+  <div class="rounded-xl overflow-hidden shadow-lg h-[50vh]">
+    <iframe
+      *ngIf="project?.location"
+      [src]="getSafeMap(project?.location?.mapEmbed)"
+      class="w-full h-full border-0"
+      loading="lazy">
+    </iframe>
   </div>
-</div>
+
+</section>

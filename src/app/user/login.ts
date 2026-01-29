@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, Inject, PLATFORM_ID, HostListener } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SubscribeService } from '../subscribe.service';
@@ -9,29 +9,42 @@ import { SubscribeService } from '../subscribe.service';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './login.html',
-  styleUrls: ['./login.scss']
 })
-export class LoginComponent implements AfterViewInit {
+export class LoginComponent {
 
-  @ViewChild('mainContainer') mainContainer!: ElementRef<HTMLDivElement>;
+  isSignUp = false;
 
   signupData = { name: '', email: '', password: '' };
   loginData = { email: '', password: '' };
 
-  constructor(private subscribeService: SubscribeService, private router: Router) { }
+  constructor(
+    private subscribeService: SubscribeService,
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
-  ngAfterViewInit() { }
-
-  // Animation toggle
+  // ---------- UI TOGGLES ----------
   onSignUp() {
-    this.mainContainer.nativeElement.classList.add('right-panel-active');
+    this.isSignUp = true;
   }
 
   onSignIn() {
-    this.mainContainer.nativeElement.classList.remove('right-panel-active');
+    this.isSignUp = false;
   }
 
-  // SIGNUP
+  // ---------- RESPONSIVE (SSR SAFE) ----------
+  get isMobile(): boolean {
+    if (!isPlatformBrowser(this.platformId)) return false;
+    return window.innerWidth < 768;
+  }
+
+  // Optional: re-evaluate on resize
+  @HostListener('window:resize')
+  onResize() {
+    // getter auto re-evaluates
+  }
+
+  // ---------- SIGNUP ----------
   onSignupSubmit() {
     if (!this.signupData.name || !this.signupData.email || !this.signupData.password) {
       alert('Please fill all fields.');
@@ -44,37 +57,27 @@ export class LoginComponent implements AfterViewInit {
         this.signupData = { name: '', email: '', password: '' };
         this.onSignIn();
       },
-      error: (err) => {
-        console.error('Signup error:', err);
-        alert('Signup failed.');
-      }
+      error: () => alert('Signup failed'),
     });
   }
 
-  // LOGIN
+  // ---------- LOGIN ----------
   onLoginSubmit() {
     this.subscribeService.login(this.loginData).subscribe({
       next: (res: any) => {
-        if (res && res.token) {
+        if (res?.token) {
           localStorage.setItem('token', res.token);
           localStorage.setItem('role', res.role);
         }
 
-        console.log('ROLE FROM SERVER:', res.role);
-
-        const userRole = res.role?.toLowerCase().trim();
-
+        const role = res.role?.toLowerCase()?.trim();
         setTimeout(() => {
-          if (userRole === 'admin') {
-            this.router.navigate(['/admin/get-project']);
-          } else {
-            this.router.navigate(['/']);
-          }
+          role === 'admin'
+            ? this.router.navigate(['/admin/get-project'])
+            : this.router.navigate(['/']);
         }, 100);
       },
-      error: (err) => {
-        console.error('Login error:', err);
-      }
+      error: () => alert('Login failed'),
     });
   }
 }

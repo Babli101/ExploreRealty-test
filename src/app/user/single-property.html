@@ -1,0 +1,155 @@
+<!-- Property Overview Section -->
+<section class="bg-blue-100 py-24" *ngIf="property as p">
+
+  <!-- TOP CARD -->
+  <div class="flex justify-center px-4">
+    <div class="max-w-5xl w-full bg-white rounded-xl shadow-lg p-6">
+
+      <div class="grid md:grid-cols-2 gap-6">
+
+        <!-- Table Section -->
+        <div class="space-y-4 overflow-x-auto">
+
+          <!-- Description -->
+          <p class="text-gray-700">
+            <span class="font-semibold">Description:</span>
+            {{ p.description || '—' }}
+          </p>
+
+          <!-- Table 1 -->
+          <table class="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="p-2 text-left">Area</th>
+                <th class="p-2 text-left">Status</th>
+                <th class="p-2 text-left">Floor</th>
+                <th class="p-2 text-left">Transaction Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2">{{ p.size || '—' }}</td>
+                <td class="p-2">{{ p.status || '—' }}</td>
+                <td class="p-2">{{ p.floor || '—' }}</td>
+                <td class="p-2">{{ p.transactionType || '—' }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Table 2 -->
+          <table class="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="p-2 text-left">Possession Status</th>
+                <th class="p-2 text-left">Furnished</th>
+                <th class="p-2 text-left">Age</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2">{{ p.possession || '—' }}</td>
+                <td class="p-2">{{ p.furnished || '—' }}</td>
+                <td class="p-2">{{ p.age || '—' }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+        <!-- Image Slider -->
+        <div class="flex items-center">
+          <div class="relative w-full h-64 overflow-hidden rounded-xl shadow-md">
+
+            <div
+              class="flex h-full transition-transform duration-700 ease-in-out"
+              [style.transform]="'translateX(-' + currentIndex * 100 + '%)'"
+            >
+              <img
+                *ngFor="let img of images"
+                [src]="img"
+                class="w-full h-full object-cover flex-shrink-0"
+                alt="Property image"
+              />
+            </div>
+
+            <button
+              (click)="prev()"
+              class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/50 text-white px-3 py-1 rounded-lg hover:bg-black/70"
+            >
+              ‹
+            </button>
+
+            <button
+              (click)="next()"
+              class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/50 text-white px-3 py-1 rounded-lg hover:bg-black/70"
+            >
+              ›
+            </button>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM CARD -->
+  <div class="flex justify-center mt-10 px-4">
+    <div class="max-w-5xl w-full bg-white rounded-xl shadow-lg p-6">
+
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <!-- LEFT -->
+        <div class="md:col-span-2">
+          <h1 class="text-xl font-semibold mb-4">More Details</h1>
+
+          <ul class="list-disc list-inside text-gray-700 mb-6 space-y-6">
+            <li>
+              <strong>Booking Amount:</strong>
+              ₹ {{ p.bookingAmount || '—' }}
+            </li>
+            <li>
+              <strong>Address:</strong>
+              {{ p.address || '—' }}
+            </li>
+            <li>
+              <strong>Description:</strong>
+              {{ p.description || '—' }}
+            </li>
+          </ul>
+        </div>
+
+        <!-- RIGHT : Price Card -->
+        <div class="bg-black text-white rounded-xl p-6 flex flex-col justify-between">
+          <div>
+            <p class="text-gray-400 text-sm">Property Price</p>
+            <h2 class="text-3xl font-bold mt-2">
+              ₹ {{ p.price || '—' }}
+            </h2>
+            <p class="text-gray-400 text-sm mt-1">
+              {{ p.negotiable ? 'Negotiable' : '' }}
+            </p>
+          </div>
+
+          <div class="mt-6 space-y-3">
+            <a
+              [href]="'https://wa.me/' + p.ownerPhone"
+              class="block text-center bg-green-500 py-2 rounded-lg font-medium"
+            >
+              WhatsApp Owner
+            </a>
+            <a
+              [href]="'tel:' + p.ownerPhone"
+              class="block text-center bg-blue-600 py-2 rounded-lg font-medium"
+            >
+              Call Owner
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</section>

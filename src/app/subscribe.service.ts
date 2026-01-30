@@ -59,10 +59,26 @@ export interface Property {
   price?: number | string;
   category?: string;
 
-  gallery?: {
-    url?: string;
-    filename?: string;
-  }[];
+  // gallery
+  gallery?: GalleryItem[];
+
+  // basic details
+  description?: string;
+  address?: string;
+  bookingAmount?: string;
+
+  // table data
+  size?: string;
+  status?: string;
+  floor?: string;
+  transactionType?: string;
+  possession?: string;
+  furnished?: string;
+  age?: string;
+
+  // owner / contact
+  ownerPhone?: string;
+  negotiable?: boolean;
 }
 
 /* -----------------------------

@@ -57,29 +57,30 @@ export interface Property {
   _id?: string;
   placeName?: string;
   price?: number | string;
-  category?: string;
 
-  // gallery
+  // gallery ✅ FIXED
   gallery?: GalleryItem[];
 
   // basic details
   description?: string;
   address?: string;
-  bookingAmount?: string;
+
+  // pricing
+  bprice?: number;
 
   // table data
-  size?: string;
-  status?: string;
-  floor?: string;
-  transactionType?: string;
-  possession?: string;
-  furnished?: string;
+  size?: number | string;
+  status?: string[];
+  floor?: number | string;
+  transactionType?: string[];
+  furnishing?: string[];
   age?: string;
 
-  // owner / contact
-  ownerPhone?: string;
-  negotiable?: boolean;
+  // contact
+  phone?: string;
 }
+
+
 
 /* -----------------------------
    Service

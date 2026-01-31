@@ -3,6 +3,11 @@ import { Component, Inject, PLATFORM_ID, HostListener } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SubscribeService } from '../subscribe.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+
+/* ✅ MUST be outside class */
+declare var google: any;
 
 @Component({
   selector: 'app-login',
@@ -17,13 +22,18 @@ export class LoginComponent {
   signupData = { name: '', email: '', password: '' };
   loginData = { email: '', password: '' };
 
+  // 🔒 Google login state
+  googleInitialized = false;
+  googleRequestInProgress = false;
+
   constructor(
     private subscribeService: SubscribeService,
     private router: Router,
+    private http: HttpClient,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
-  // ---------- UI TOGGLES ----------
+  /* ================= UI TOGGLES ================= */
   onSignUp() {
     this.isSignUp = true;
   }
@@ -32,19 +42,16 @@ export class LoginComponent {
     this.isSignUp = false;
   }
 
-  // ---------- RESPONSIVE (SSR SAFE) ----------
+  /* ================= RESPONSIVE ================= */
   get isMobile(): boolean {
     if (!isPlatformBrowser(this.platformId)) return false;
     return window.innerWidth < 768;
   }
 
-  // Optional: re-evaluate on resize
   @HostListener('window:resize')
-  onResize() {
-    // getter auto re-evaluates
-  }
+  onResize() {}
 
-  // ---------- SIGNUP ----------
+  /* ================= SIGNUP ================= */
   onSignupSubmit() {
     if (!this.signupData.name || !this.signupData.email || !this.signupData.password) {
       alert('Please fill all fields.');
@@ -61,7 +68,7 @@ export class LoginComponent {
     });
   }
 
-  // ---------- LOGIN ----------
+  /* ================= NORMAL LOGIN ================= */
   onLoginSubmit() {
     this.subscribeService.login(this.loginData).subscribe({
       next: (res: any) => {
@@ -79,5 +86,44 @@ export class LoginComponent {
       },
       error: () => alert('Login failed'),
     });
+  }
+
+  /* ================= GOOGLE LOGIN (FIXED) ================= */
+  loginWithGoogle() {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    // 🔒 Prevent multiple requests
+    if (this.googleRequestInProgress) return;
+
+    // ✅ Initialize only once
+    if (!this.googleInitialized) {
+      google.accounts.id.initialize({
+        client_id: environment.googleClientId,
+        callback: (response: any) => {
+          this.googleRequestInProgress = false;
+          this.sendTokenToBackend(response.credential);
+        }
+      });
+      this.googleInitialized = true;
+    }
+
+    this.googleRequestInProgress = true;
+    google.accounts.id.prompt(); // 🔥 Google popup
+  }
+
+  /* ================= SEND TOKEN TO BACKEND ================= */
+  sendTokenToBackend(token: string) {
+    this.http.post(`${environment.apiBaseUrl}/auth/google`, { token })
+      .subscribe({
+        next: (res: any) => {
+          localStorage.setItem('token', res.token);
+          localStorage.setItem('role', res.role || 'user');
+          this.router.navigate(['/']);
+        },
+        error: () => {
+          this.googleRequestInProgress = false;
+          alert('Google login failed');
+        }
+      });
   }
 }

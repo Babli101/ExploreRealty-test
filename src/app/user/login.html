@@ -148,3 +148,12 @@
 
   </div>
 </div>
+<button
+  type="button"
+  [disabled]="googleRequestInProgress"
+  class="bg-red-500 text-white w-full py-2 rounded-full mt-2
+         disabled:opacity-50"
+  (click)="loginWithGoogle()">
+  Continue with Google
+</button>
+
